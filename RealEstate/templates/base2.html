@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}CK Real Estate{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <!-- Add your common CSS and JavaScript imports here -->
+
+</head>
+<body>
+      <header class="header">
+            <div class="column">
+            
+            </div>
+            <div class="column"> 
+                <img src="{% static "images/logo.png" %}" class="logo" alt="logo" />
+            </div>
+              <div class="column">
+                  <div class="menu" style="padding-bottom: 125px;">
+                     <ul style="float: right">
+                         {% if user.is_authenticated %}
+                        <li>
+                            <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Log Out</button>
+                            </form>
+                        </li> 
+                         {% else %}
+                         <li><a href="{% url 'home' %}">Home</a></li> 
+                         {% endif %}
+                     </ul>
+                     
+                    </div>
+                 
+              </div>
+    </header>
+    
+    <main>
+     
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer style="text-align: center">
+        <!-- Add your footer content here -->
+        <p>&copy; 2024 All Listings, LLC. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends 'base2.html' %}
+{% block content %}
+    <div class="container-fluid">
+  <span style="text-align: center"  >
+<form method="POST" novalidate>
+	{% csrf_token %}
+	<h2>Login</h2>
+	{{form.as_p}}
+	<p style="padding-left: 200px"><input type="submit" value="Login" /></p>
+</form>
+    </span>
+</div>
+{% endblock content%}

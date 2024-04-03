@@ -1,0 +1,62 @@
+<!-- base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}CK Real Estate{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+ <header class="header">
+          
+            <div class="column"> 
+                
+                <div class="menu" style="padding-bottom: 115px;">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><span>|</span></li>
+                <li><a href="#">All Listings</a></li>
+                <li><span>|</span></li>
+                <li><a href="#">Profile</a></li>
+                <li><span>|</span></li>
+                <li><a href="#">Omaha Links</a></li>
+            </ul>
+                </div>
+            
+            </div>
+            <div class="column"> 
+                <img src="{% static "images/logo.png" %}" class="logo" alt="logo"/>
+            </div>
+              <div class="column">
+                  <div class="menu" style="padding-bottom: 125px; float: right">
+                     <ul><li> 
+                         <a href="#" class="btn-md">
+                             <span class="glyphicon glyphicon-search"></span> Search All Listings
+                         </a></li>
+                         <li><span>|</span></li>
+                        <li><a href="{% url 'login' %}">Login</a></li> 
+                     </ul>
+                     
+                    </div>
+                 
+              </div>
+
+       
+         
+    </header>
+    
+    <main>
+     <p> <br> </p>
+          <p> <br> </p>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer style="text-align: center">
+        <!-- Add your footer content here -->
+        <p>&copy; 2024 All Listings, LLC. All rights reserved.</p>
+    </footer>
+</body>
+</html>

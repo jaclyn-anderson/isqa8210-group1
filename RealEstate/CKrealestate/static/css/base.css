@@ -1,0 +1,63 @@
+body {
+            background-color: #EEEEEE;
+            font-family: "Bell MT", monospace;
+            font-size: medium;
+        }
+.header {
+    display: flex;
+    justify-content: space-between; /* Distribute columns evenly */
+    align-items: center; /* Center content vertically */
+    padding: 10px; /* Adjust padding as needed */
+}
+main {
+    min-height: 500px;
+}
+
+.column {
+    flex: 1; /* Each column occupies equal space */
+    text-align: center; /* Center text horizontally */
+}
+.logo {
+    width: 120px; /* Adjust the width and height as needed */
+    height: 100px;
+    background-size: contain; /* Adjust the background size as needed */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+    .menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+        overflow: hidden;
+    }
+
+.menu ul li {
+    display: inline-block;
+}
+
+.menu li { float: left;
+}
+
+.menu ul li:not(:last-child) {
+    margin-right: 10px; /* Adjust spacing between menu items */
+}
+
+.menu ul li span {
+    color: #999999; /* Color of the pipe */
+    margin: 0 5px; /* Adjust spacing around the pipe */
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #666666;
+}
+
+.menu ul li a:hover {
+    text-decoration: underline;
+}
+
+.admin-btn {
+    background-color: #999999;
+    width: 150px;
+    border-color: #999999;
+    color: #EEEEEE;
+}
