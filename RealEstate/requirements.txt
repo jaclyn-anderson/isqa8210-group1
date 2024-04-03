@@ -1,0 +1,2 @@
+django-crispy-forms
+django==5.0.3
