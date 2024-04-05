@@ -10,53 +10,56 @@
     <link href="{% static "css/base.css" %}" rel="stylesheet">
 </head>
 <body>
+
+
  <header class="header">
-          
-            <div class="column"> 
+     <div class="row"> 
+         <div class="col-sm-4">
+                <img src="{% static "images/logo.png" %}" class="logo" alt="logo" style="margin-left: 10px"/>
+            </div>
+            <div class="col-sm-4" style="margin-top: 50px; text-align: center; font-size: x-large; font-weight: bold">
+                Welcome to CK Real Estate! <br>Explore our listings and discover your dream home today.
+            </div>
+            <div class="col-sm-4" >
+                        <a class="btn admin-btn" style="float: right" href="{% url 'login' %}">Login</a>
+             </div>
+      </div>
+     
+  </header>
+         <div class="row">
+             <hr>
+         </div>
+        <div class="row" style="margin-top: 10px; margin-left: 50px;"> 
                 
-                <div class="menu" style="padding-bottom: 115px;">
+                <div class="menu">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
                 <li><span>|</span></li>
                 <li><a href="#">All Listings</a></li>
                 <li><span>|</span></li>
-                <li><a href="#">Profile</a></li>
+                <li>
+                     <a href="#" class="btn-md">
+                     Search All Listings
+                      </a></li>
+                <li><span>|</span></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
                 <li><span>|</span></li>
                 <li><a href="#">Omaha Links</a></li>
             </ul>
                 </div>
             
-            </div>
-            <div class="column"> 
-                <img src="{% static "images/logo.png" %}" class="logo" alt="logo"/>
-            </div>
-              <div class="column">
-                  <div class="menu" style="padding-bottom: 125px; float: right">
-                     <ul><li> 
-                         <a href="#" class="btn-md">
-                             <span class="glyphicon glyphicon-search"></span> Search All Listings
-                         </a></li>
-                         <li><span>|</span></li>
-                        <li><a href="{% url 'login' %}">Login</a></li> 
-                     </ul>
-                     
-                    </div>
-                 
-              </div>
-
-       
-         
-    </header>
-    
+        </div>
+           
     <main>
-     <p> <br> </p>
-          <p> <br> </p>
+   
+       
         {% block content %}{% endblock %}
     </main>
 
-    <footer style="text-align: center">
-        <!-- Add your footer content here -->
-        <p>&copy; 2024 All Listings, LLC. All rights reserved.</p>
+    <footer style="text-align: center;">
+        
+        2024 All Listings, LLC. All rights reserved.
+        
     </footer>
 </body>
 </html>

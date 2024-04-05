@@ -1,9 +1,50 @@
 <!-- home.html -->
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
+{% load static %}
 {% block title %}Home - My Website{% endblock %}
 
 {% block content %}
-    <h2 style="text-align: center">Welcome</h2>
-    <!-- Add your home page content here -->
+    <div class="row">
+        <div class="col-md-4" style="margin-top: 90px; padding-right: 15px;">
+       
+          <p> <img style="float: right;" src="{% static "images/house1.jpeg" %}" class="home-pic" />
+        </p><br><br><br>
+        
+        </div>
+     
+        <div class="col-md-6" style="margin-top: 130px; margin-left: 15px;">
+             <div class="col-md-4" style="margin-left: 15px; font-size: xx-large; font-weight: bolder">
+                 <p>$335,7777</p>
+        </div>
+             <div style="border:solid 1px gray; padding: 10px">  Welcome to your picturesque Craftsman Bungalow 
+                nestled in sought-after Wallingford. 
+                Enjoy southern views of Downtown & Lake Union 
+                from the sunny living room or darling front porch 
+                as you sip your favorite libation. This home 
+                combines timeless charm with modern amenities, 
+                offering a cozy retreat within the bustling city 
+                and options for your preferred way of living. 
+                Enjoy an expansive Primary bedroom, old world 
+                charm and curated landscaping that includes irrigation, 
+                fruit trees and perennial herbs. Did we mention 
+                there's an outdoor fireplace? And 2 addt'l 
+                shed cottages for an office and/or gym? 
+                And off-street parking for 3, new appliances, 
+                a newer roof and updated electrical...?! 
+                Don't miss this gem!
+             </div> 
+            
+            <div>
+                <br>
+                <div><span class="sm-gray-box">Year Built: 2000</span>
+                    <span class="sm-gray-box">Townhome</span></div>
+                              
+            <br> 
+          
+            </div>
+          
+       </div>
+      </div>
+    <div class="row" style="margin-top: 20px; margin-left: 150px"><a style="width: 600px; font-size: larger" href="" class="btn admin-btn" >Click to View Details</a> &nbsp;</div>
 {% endblock %}

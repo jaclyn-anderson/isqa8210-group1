@@ -9,3 +9,8 @@ def home(request):
 @login_required(login_url='home')
 def siteadminlanding(request):
     return render(request, 'siteadminlanding.html')
+
+
+def profile(request):
+    return render(request, 'profile.html')
+    
