@@ -1,10 +1,41 @@
 {% extends 'base2.html' %}
 {% block content %}
-    <div class="container-fluid">
-    <div class="column" style="margin-top: 50px;"> 
-       <p> <a href="#" class="btn btn-md admin-btn">Manage Property</a></p>
-      <p>  <a href="#" class="btn btn-md admin-btn">Update Profile</a></p>
-      <p>  <a href="#" class="btn btn-md admin-btn">Reports</a></p>
+    <hr>
+<div class="row">
+    <p style="float: right; margin-right: 20px;"> <a href="#" class="btn btn-info" style="background-color: blue; font-size: large; width: 200px;">Update Profile</a></p>
+</div>
+    
+<div class="row" style="margin-top: 100px">
+  <div class="col-sm-4"> 
+       <p style="margin-left: 20px"> <a href="#" class="btn btn-info" style="background-color: blue; font-size: large; height: 40px; width: 200px;">Add Property</a></p>
+  </div>
+  <div class="col-sm-4">
+        <p></p>
+   </div>
+   <div class="col-sm-4">
+      <p style="margin-right: 20px; float: right">  <a href="#" class="btn btn-info" style="background-color: blue; font-size: large; width: 200px;">Reports</a></p>
     </div>
+</div>
+<div class="row">
+<div class="col-sm-6" style="margin-left: 200px; margin-top: 30px">
+<table>
+{% if property.count != 0 %}
+     {% for property in object_list %}
+    <tr>
+        
+           <td>{{ property.property_id }} </td>
+    <td>{{ property.property_title }} </td>
+        
+    </tr>
+     {% endfor %}
+{% else %}
+    <tr>
+    <td style="width: 780px"></td>
+    <td colspan="6" style="font-size: larger">No Listings in Database</td>
+    <td></td>
+    </tr>
+{% endif %}
+</table>
+</div>
 </div>
 {% endblock content%}

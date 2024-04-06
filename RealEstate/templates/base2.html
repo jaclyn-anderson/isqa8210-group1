@@ -18,6 +18,7 @@
             <div class="column"> 
                 <img src="{% static "images/logo.png" %}" class="logo" alt="logo" />
             </div>
+      
               <div class="column">
                   <div class="menu" style="padding-bottom: 125px;">
                      <ul style="float: right">
@@ -25,7 +26,7 @@
                         <li>
                             <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
-                            <button type="submit">Log Out</button>
+                            <button class="admin-btn" type="submit">Log Out</button>
                             </form>
                         </li> 
                          {% else %}
@@ -44,7 +45,7 @@
     </main>
 
     <footer style="text-align: center">
-        <!-- Add your footer content here -->
+        <hr>
         <p>&copy; 2024 All Listings, LLC. All rights reserved.</p>
     </footer>
 </body>

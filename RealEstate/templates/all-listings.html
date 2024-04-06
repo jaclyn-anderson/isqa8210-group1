@@ -1,0 +1,31 @@
+<!-- all-listings.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}All Listings - CK Real Estate{% endblock %}
+
+{% block content %}
+<div class="row">
+ <div class="col-sm-6" style="margin-left: 200px; margin-top: 30px">
+      <table>
+      {% if property.count != 0 %}
+         {% for property in object_list %}
+        <tr>
+            
+               <td>{{ property.property_id }} </td>
+        <td>{{ property.property_title }} </td>
+            
+        </tr>
+         {% endfor %}
+     {% else %}
+        <tr>
+        <td style="width: 780px"></td>
+        <td colspan="6" style="font-size: larger">No Listings in Database</td>
+        <td></td>
+        </tr>
+     {% endif %}
+      </table>
+ </div>
+</div>
+
+{% endblock %}

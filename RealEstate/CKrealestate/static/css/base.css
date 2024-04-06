@@ -121,3 +121,10 @@ footer {
     border-color: white;
     color: black;
 }
+
+.site-admin-btn {
+    background-color: blue;
+    font-size: large;
+    height: 40px;
+    width: 200px;
+}
