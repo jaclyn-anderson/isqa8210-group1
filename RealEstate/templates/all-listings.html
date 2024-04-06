@@ -7,13 +7,18 @@
 {% block content %}
 <div class="row">
  <div class="col-sm-6" style="margin-left: 200px; margin-top: 30px">
-      <table>
+      <table class="table table-striped">
       {% if property.count != 0 %}
-         {% for property in object_list %}
+         {% for item in property %}
+             
+             <th>All Properties</th>
+             <tr>
+             <td>Proeprty ID</td><td>Property Title</td>
+             </tr>
         <tr>
-            
-               <td>{{ property.property_id }} </td>
-        <td>{{ property.property_title }} </td>
+           <tbody> 
+               <td>{{ item.property_id }} </td>
+        <td>{{ item.property_title }} </td>
             
         </tr>
          {% endfor %}
@@ -24,6 +29,7 @@
         <td></td>
         </tr>
      {% endif %}
+      </tbody>
       </table>
  </div>
 </div>

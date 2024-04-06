@@ -9,26 +9,20 @@
     <div class="container" style="margin-top: 20px">
     <div class="row">
         <div class="col-sm-4">
-            <img style="float: left" src="{% static "images/carlos.jpg" %}" class="profile-pic" />
+            {% for item in contact %} 
+            <img style="float: left" src="{{ item.contact_profile_image }}" class="profile-pic" />
         </div>
         <div class="col-sm-8" style="align-content: center; padding-top: 20px; box-shadow: gray">
             <h3>Realtor:  Carlos Kosala</h3>
-            <p style="word-wrap: break-word">Carlos Kosala is your go-to real estate professional 
-                in the vibrant Omaha area. With 20 years of experience, 
-                Carlos brings a wealth of knowledge and expertise to 
-                every transaction. Known for his integrity, honesty, 
-                and personalized service, Carlos is dedicated to helping 
-                clients achieve their real estate goals with confidence. 
-                Whether you're buying, selling, or investing, 
-                trust Carlos Kosala to guide you through the process and 
-                deliver exceptional results. Contact him today and experience the 
-                difference of working with a trusted Omaha real estate advisor.</p>
+            
+            <p style="word-wrap: break-word">{{ item.contact_profile_description }}</p>
              <ul style="list-style-type: none;">
-                <li>CK Real Estate: www.ckrealestate.com</li>
-                <li>Office Address: 12345 S. 210 Street</li>
+                <li>CK Real Estate: {{ item.contact_website_link }}</li>
+                <li>Office Address: {{ item.contact_office_street_address}}</li>
+             <li>{{ item.contact_office_city}} , {{ item.contact_office_state }} &nbsp;{{ item.contact_office_zip_code }}</li>
             </ul>
        </div>
-    
+    {% endfor %}
         </div>
     <!-- Add your home page content here -->
 {% endblock %}

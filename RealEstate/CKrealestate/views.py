@@ -1,20 +1,24 @@
 from django.shortcuts import render
-from .models import Property
+from .models import Property, Contact
 from django.contrib.auth.decorators import login_required
 
 
 def home(request):
-    return render(request, 'home.html')
+    featured = Property.objects.filter(property_featured=True)
+
+    return render(request, 'home.html', {'featured': featured})
 
 
 def all_listings(request):
-    property = Property.objects.all()
+    property = Property.objects.all().order_by('property_id')
 
     return render(request, 'all-listings.html', {'property': property})
 
 
 def profile(request):
-    return render(request, 'profile.html')
+    contact = Contact.objects.all()
+
+    return render(request, 'profile.html', {"contact": contact})
 
 
 def omahalinks(request):

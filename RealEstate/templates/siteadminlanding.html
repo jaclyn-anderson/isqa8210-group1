@@ -18,22 +18,27 @@
 </div>
 <div class="row">
 <div class="col-sm-6" style="margin-left: 200px; margin-top: 30px">
-<table>
-{% if property.count != 0 %}
-     {% for property in object_list %}
-    <tr>
-        
-           <td>{{ property.property_id }} </td>
-    <td>{{ property.property_title }} </td>
-        
-    </tr>
-     {% endfor %}
-{% else %}
-    <tr>
-    <td style="width: 780px"></td>
-    <td colspan="6" style="font-size: larger">No Listings in Database</td>
-    <td></td>
-    </tr>
+<table class="table table-striped">
+      {% if property.count != 0 %}
+         {% for item in property %}
+             
+             <th>All Properties</th>
+             <tr>
+             <td>Proeprty ID</td><td>Property Title</td>
+             </tr>
+        <tr>
+           <tbody> 
+               <td>{{ item.property_id }} </td>
+        <td>{{ item.property_title }} </td>
+            
+        </tr>
+         {% endfor %}
+     {% else %}
+        <tr>
+        <td style="width: 780px"></td>
+        <td colspan="6" style="font-size: larger">No Listings in Database</td>
+        <td></td>
+        </tr>
 {% endif %}
 </table>
 </div>
