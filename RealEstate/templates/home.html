@@ -3,17 +3,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Home - My Website{% endblock %}
-
 {% block content %}
     <div class="row">
-        <div class="col-md-4" style="margin-top: 90px; padding-right: 15px;">
-       
-          <p> <img style="float: right;" src="{% static "images/house1.jpeg" %}" class="home-pic" />
-        </p><br><br><br>
-        
-        </div>
-     
-        <div class="col-md-6" style="margin-top: 130px; margin-left: 15px;">
+    <div class="col-md-5" style="margin-left: 50px">
+        <img src="{% static "images/house1.jpeg" %}" class="home-pic"  alt="image"/>
+       <div style="padding-top: 20px"> <a style="width: 600px; font-size: larger" href="" class="btn admin-btn" >Click to View Details</a> </div>
+    </div>
+    <div class="col-md-6" style="margin-top: 130px; margin-left: 15px;">
              <div class="col-md-4" style="margin-left: 15px; font-size: xx-large; font-weight: bolder">
                  <p>$335,7777</p>
         </div>
@@ -46,5 +42,8 @@
           
        </div>
       </div>
-    <div class="row" style="margin-top: 20px; margin-left: 150px"><a style="width: 600px; font-size: larger" href="" class="btn admin-btn" >Click to View Details</a> &nbsp;</div>
+    </div>
+
+        
+        
 {% endblock %}

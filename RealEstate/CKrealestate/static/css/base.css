@@ -8,38 +8,39 @@ body {
 }
 
 .header {
-
     justify-content: space-between; /* Distribute columns evenly */
     align-items: center; /* Center content vertically */
     padding: 10px; /* Adjust padding as needed */
 }
-main {
+
+.main {
     min-height: 800px;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-image: linear-gradient(to right, ghostwhite, lightblue, #AEDEFF);
-        }
+}
 
 .column {
     flex: 1; /* Each column occupies equal space */
     text-align: center; /* Center text horizontally */
 }
+
 .logo {
     width: 150px; /* Adjust the width and height as needed */
     height: 130px;
     background-size: contain; /* Adjust the background size as needed */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
-    box-shadow: 10px 10px 10px;
+    border-radius: 5px;
     float: left;
 }
 
 .home-pic {
-    width: 600px; /* Adjust the width and height as needed */
-    height: 550px;
+    padding-top: 20px;
+    width: 500px; /* Adjust the width and height as needed */
+    height: 350px;
     background-size: contain; /* Adjust the background size as needed */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
-    box-shadow: 10px 10px 10px 10px;
 }
 
 .profile-pic {
@@ -49,20 +50,22 @@ main {
     background-repeat: no-repeat; /* Prevent the background image from repeating */
     box-shadow: 10px 10px 10px 10px;
 }
-    .menu ul {
+
+.menu ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-        overflow: hidden;
-    }
+    overflow: hidden;
+}
 
 .menu ul li {
     display: inline-block;
-    font-size: x-large;
+    font-size: large;
     font-weight: bold;
 }
 
-.menu li { float: left;
+.menu li {
+    float: left;
 }
 
 .menu ul li:not(:last-child) {
@@ -86,21 +89,14 @@ main {
 
 .admin-btn {
     background-color: white;
-    width: 180px;
+    width: 140px;
     font-size: medium;
-    box-shadow: 10px 1px;
-    border-color: white;
+    border-color: grey;
     color: black;
+    border-radius: 12px;
 }
 
-footer {
-    background-image: linear-gradient(to right, ghostwhite, lightskyblue, #AEDEFF);
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.gray-sm-line{
+.gray-sm-line {
     background-image: linear-gradient(to right, gray, lightgray);
 }
 
