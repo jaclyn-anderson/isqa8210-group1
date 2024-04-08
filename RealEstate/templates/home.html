@@ -4,44 +4,30 @@
 {% load static %}
 {% block title %}Home - My Website{% endblock %}
 {% block content %}
+    <div class="container-lg" style="margin-left: 50px;">
     <div class="row">
-    <div class="col-md-5" style="margin-left: 50px">
-        <img src="{% static "images/house1.jpeg" %}" class="home-pic"  alt="image"/>
-       <div style="padding-top: 20px"> <a style="width: 600px; font-size: larger" href="" class="btn admin-btn" >Click to View Details</a> </div>
-    </div>
-    <div class="col-md-6" style="margin-top: 130px; margin-left: 15px;">
-             <div class="col-md-4" style="margin-left: 15px; font-size: xx-large; font-weight: bolder">
-                 <p>$335,7777</p>
+        <div class="col-md-4">
+            <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Featured Property: Your Dream Home Awaits!</span></h2>
+            <img src="{% static "images/featuredProperty.jpeg" %}" class="home-pic"  alt="image"/>
+           <div style="padding-top: 20px"><button type="button" style="font-size: larger; width: 500px;" href="" class="admin-btn" >
+               Click to View Details</button></div>
         </div>
-             <div style="border:solid 1px gray; padding: 10px">  Welcome to your picturesque Craftsman Bungalow 
-                nestled in sought-after Wallingford. 
-                Enjoy southern views of Downtown & Lake Union 
-                from the sunny living room or darling front porch 
-                as you sip your favorite libation. This home 
-                combines timeless charm with modern amenities, 
-                offering a cozy retreat within the bustling city 
-                and options for your preferred way of living. 
-                Enjoy an expansive Primary bedroom, old world 
-                charm and curated landscaping that includes irrigation, 
-                fruit trees and perennial herbs. Did we mention 
-                there's an outdoor fireplace? And 2 addt'l 
-                shed cottages for an office and/or gym? 
-                And off-street parking for 3, new appliances, 
-                a newer roof and updated electrical...?! 
-                Don't miss this gem!
-             </div> 
-            
-            <div>
-                <br>
-                <div><span class="sm-gray-box">Year Built: 2000</span>
-                    <span class="sm-gray-box">Townhome</span></div>
-                              
-            <br> 
-          
-            </div>
-          
-       </div>
-      </div>
+         <div class="col-md-7" style="margin-left: 40px;margin-top: 70px;">
+             <div style="background-color: #eeeeee; padding: 1px; border-radius: 10px; width: 600px;">
+                 <h2> <span style="font-weight: bold; font-size: 40px; ">$1,075,000</span></h2>
+                 <h3> <span style="font-weight: normal; font-size: 20px; ">15467, StarTrek Lane, Elkhorn, NE 68022</span></h3>
+             </div>
+             <div style="padding: 50px;">
+                 <p style="font-size: 20px; text-align: center"> Must See five bedroom house  within a gated community! Enjoy your view of the lake while relaxing in the living room or enjoying yourself outside from your patio.</p>
+             </div>
+             
+             <div style="height: 50px; background-color: #eeeeee; width: fit-content; padding: 12px; border-radius: 5px; display: flex">
+                 <div> <i class="fa fa-home" aria-hidden="true"></i>Town House</div>
+                <div><i class="fa fa-hand-paper-o" aria-hidden="true"></i>Built in 2016</div>
+             </div>
+         </div>
+
+    </div>
     </div>
 
         
