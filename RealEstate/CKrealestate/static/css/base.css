@@ -37,10 +37,12 @@ body {
 
 .home-pic {
     padding-top: 20px;
-    width: 500px; /* Adjust the width and height as needed */
-    height: 350px;
+    width: 250px; /* Adjust the width and height as needed */
+    height: 175px;
+    border-radius: 10px;
     background-size: contain; /* Adjust the background size as needed */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
+    float: left;
 }
 
 .profile-pic {
@@ -53,8 +55,8 @@ body {
 
 .menu ul {
     list-style-type: none;
-    padding: 0;
-    margin: 0;
+    padding: 5px;
+    margin: 5px;
     overflow: hidden;
 }
 
@@ -104,9 +106,10 @@ body {
     -webkit-box-align: center;
     align-items: center;
     background-color: lightgrey;
+    border-color: grey;
     border-radius: 10% 10% 10% 10%;
     width: 400px;
-    padding: 12px;
+    padding: 20px;
 }
 
 .sm-login-box {
@@ -115,7 +118,7 @@ body {
     font-size: medium;
     box-shadow: 10px 1px;
     border-color: white;
-    color: black;
+    color: gray;
 }
 
 .site-admin-btn {
