@@ -37,12 +37,9 @@ body {
 
 .home-pic {
     padding-top: 20px;
-    width: 250px; /* Adjust the width and height as needed */
-    height: 175px;
-    border-radius: 10px;
+    height: 350px;
     background-size: contain; /* Adjust the background size as needed */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
-    float: left;
 }
 
 .profile-pic {
@@ -82,7 +79,7 @@ body {
 
 .menu ul li a {
     text-decoration: underline;
-    color: blue;
+    color: #0073e5;
 }
 
 .menu ul li a:hover {
@@ -108,8 +105,6 @@ body {
     background-color: lightgrey;
     border-color: grey;
     border-radius: 10% 10% 10% 10%;
-    width: 400px;
-    padding: 20px;
 }
 
 .sm-login-box {
