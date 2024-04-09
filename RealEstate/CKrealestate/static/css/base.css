@@ -38,6 +38,7 @@ body {
 .home-pic {
     padding-top: 20px;
     height: 350px;
+    width: auto;
     background-size: contain; /* Adjust the background size as needed */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
 }
