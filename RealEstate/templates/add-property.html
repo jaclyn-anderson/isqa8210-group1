@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Property - My Website{% endblock %}
+
+{% block content %}
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Add New Property</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- property fields -->
+                <div class="form-group">
+                    <label for="{{ property_form.property_title.id_for_label }}">Property Title</label>
+                    {{ property_form.property_title }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.home_type.id_for_label }}">Home Type</label>
+                    {{ property_form.home_type }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.neighborhood.id_for_label }}">Neighborhood</label>
+                    {{ property_form.neighborhood }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.status.id_for_label }}">Status</label>
+                    {{ property_form.status }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.price_range.id_for_label }}">Price Range</label>
+                    {{ property_form.price_range }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_street_address.id_for_label }}">Street Address:</label>
+                    {{ property_form.property_street_address }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_city.id_for_label }}">City:</label>
+                    {{ property_form.property_city }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_state.id_for_label }}">State</label>
+                    {{ property_form.property_state }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_zip_code.id_for_label }}">ZIP Code</label>
+                    {{ property_form.property_zip_code }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_price.id_for_label }}">Price</label>
+                    {{ property_form.property_price }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_description.id_for_label }}">Description</label>
+                    {{ property_form.property_description }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_area.id_for_label }}">Area Square Footage</label>
+                    {{ property_form.property_area }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_year_built.id_for_label }}">Year Built</label>
+                    {{ property_form.property_year_built }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_bedroom_count.id_for_label }}">Bedrooms</label>
+                    {{ property_form.property_bedroom_count }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_bathroom_count.id_for_label }}">Bathrooms</label>
+                    {{ property_form.property_bathroom_count }}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="{{ photo_form.property_photo.id_for_label }}">Property Photos</label>
+                    <p> Max 4 photos - Name photos starting with numbering 1-4, in the order you'd like them to show on the website
+                    Photo name starting with the number 1 will show on the landing page for featured property</p>
+                    {{ photo_form.property_photo }}
+                </div>
+
+               <div style="padding-top: 20px"><button type="button" style="font-size: larger; width: 500px;" href="" class="admin-btn" >
+               Review and Save</button></div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
