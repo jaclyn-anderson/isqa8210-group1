@@ -18,6 +18,7 @@
 </div>
 <div class="row">
 <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px">
+
       <table class="table table-striped">
       {% if property.count != 0 %}
          
@@ -28,35 +29,64 @@
       <th colspan="3" scope="col">Property Title</th>
         <th scope="col">Property Price</th>
         <th scope="col">Neighborhood</th>
-         <th scope="col">Home Type</th>
+        <th scope="col">Home Type</th>
          <th scope="col">Featured</th>
         <th scope="col">Status</th>
+        <th scope="col">Active</th>
         <th scope="col">Update</th>
-    </tr>
+    </tr> 
   </thead>
+      <tbody> 
+       {% for obj in property %}
         <tr>
-           <tbody> 
-           {% for item in property %}
-               <td>{{ item.property_id }} </td>
-        <td colspan="3">{{ item.property_title }} </td>
-          <td>${{ item.property_price }} </td>   
-        <td>{{ item.neighborhood }} </td>
-         <td>{{ item.home_type }} </td>
-          <td>
-            <input type="checkbox" class="styled-checkbox" name="full_timer" id="fullTimer" style="margin-left: 25px"  {% if item.property_featured == True %} checked="checked" {% endif %} disabled>
+        <form method="post"> 
+        {% csrf_token %}
+           
+          
+               <td> <input type="text" name="property_id" value="{{ obj.property_id }}" hidden="hidden" >{{ obj.property_id }}  </td>
+          <td colspan="3">{{ obj.property_title }} </td> 
+        
+               <td>
+                   <input type="text" name="price" style="border: none; background: inherit;" value="{{ obj.property_price }}" >
+               </td>
+          <td>{{ obj.neighborhood }} </td>
+         <td>{{ obj.home_type }} </td>
+         <td>
+            <input type="checkbox" class="styled-checkbox" name="featured" id="featured" style="margin-left: 25px"  {% if obj.property_featured == True %} checked="checked" {% endif %}  onclick="onClickHandler()">
           </td>     
-          <td>{{ item.status }} </td>
-          <td><button style="background-color: blue; color: white;">Update</button></td>
+          <td>
+              <select name="status" style="border: none; background: inherit" disabled>
+                <option value="Available" {% if obj.status == 'Available' %}  selected {% endif %}>Available</option>
+                <option value="Pending" {% if obj.status == 'Pending' %} selected {% endif %}>Pending</option>
+                <option value="Sold" {% if obj.status == "Sold" %} selected {% endif %}>Sold</option>
+              </select>
+          </td>
+               <td>
+                <input type="checkbox" class="styled-checkbox" name="active" style="margin-left: 25px"  {% if obj.property_active == True %} checked="checked"  {% endif %} disabled >
+
+               </td>
+               <td>
+                
+                    <button type="submit">Submit</button>
+                    
+                   
+                </td>
+       </form>
         </tr>
          {% endfor %}
       {% else %}
         <tr>
         <td style="width: 780px"></td>
         <td colspan="6" style="font-size: larger">No Listings in Database</td>
-        <td></td>
-        </tr>
+        </tr> 
 {% endif %}
 </table>
+
 </div>
 </div>
+    <script>
+    function onClickHandler(){
+    var chk=document.getElementById("featured").value;
+}
+    </script>
 {% endblock content%}

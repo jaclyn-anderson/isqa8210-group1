@@ -67,6 +67,12 @@ class Property(models.Model):
     def __int__(self):
         return self.property_id
 
+    # If the property is being marked as featured, ensure no other property is featured
+    def save(self, *args, **kwargs):
+        if self.property_featured:
+            Property.objects.exclude(property_id=self.property_id).update(property_featured=False)
+            super().save(*args, **kwargs)
+
 
 class Property_Photo(models.Model):
     property_photo_id = models.AutoField(primary_key=True, unique=True)
