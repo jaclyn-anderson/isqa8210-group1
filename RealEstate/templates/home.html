@@ -7,7 +7,34 @@
     <div class="container-lg" style="margin-left: 50px;">
     <div class="row">
         <div class="col-md-4">
+        
+           {% if featured.count > 0 %}
             <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Featured Property: Your Dream Home Awaits!</span></h2>
+        {% for item in featured %}
+            <img src="{% static "images/featuredProperty.jpeg" %}" class="home-pic"  alt="image"/>
+           <div style="padding-top: 20px"><button type="button" style="font-size: larger; width: 500px;" href="" class="admin-btn" >
+               Click to View Details</button></div>
+        </div>
+         <div class="col-md-7" style="margin-left: 40px;margin-top: 70px;">
+             <div style="background-color: #eeeeee; padding: 1px; border-radius: 10px; width: 600px;">
+                 <h2> <span style="font-weight: bold; font-size: 40px; ">${{ item.property_price}}</span></h2>
+                 <h3> <span style="font-weight: normal; font-size: 20px; ">{{ item.property_street_address}} 
+                     {{ item.property_city}}, {{ item.property_state}} {{ item.property_zip_code}}</span></h3>
+             </div>
+             <div style="padding: 50px; width: 600px;">
+                 <p style="font-size: 20px; text-align: center"> {{ item.property_title}}</p>
+             </div>
+             
+             <div style="height: 50px; background-color: #eeeeee; width: 600px; padding: 12px; border-radius: 5px; display: flex">
+                 <div style="width: 50%;"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;{{ item.home_type}}</div>
+                 <div style="width: 50%;"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;Built in {{ item.property_year_built}}</div>
+             </div>
+               {% endfor %}
+         </div>
+    </div>
+    {% else %}
+                    <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Featured Property: Your Dream Home Awaits!</span></h2>
+        
             <img src="{% static "images/featuredProperty.jpeg" %}" class="home-pic"  alt="image"/>
            <div style="padding-top: 20px"><button type="button" style="font-size: larger; width: 500px;" href="" class="admin-btn" >
                Click to View Details</button></div>
@@ -22,15 +49,15 @@
              </div>
              
              <div style="height: 50px; background-color: #eeeeee; width: 600px; padding: 12px; border-radius: 5px; display: flex">
-                 <div><i class="fa fa-home" aria-hidden="true"></i>Townhome</div>
-                 <div><i class="fa fa-wrench" aria-hidden="true"></i>Built in 2016</div>
+                 <div style="width: 50%;"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Townhome</div>
+                 <div style="width: 50%;"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;Built in 2016</div>
              </div>
+               
          </div>
+    </div>            
+  {% endif %}
+  </div> 
 
-
-    </div>
-    </div>
-
-        
-        
+       
+       
 {% endblock %}
