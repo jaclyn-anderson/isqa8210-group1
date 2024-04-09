@@ -6,20 +6,30 @@
 
 {% block content %}
 <div class="row">
- <div class="col-sm-6" style="margin-left: 200px; margin-top: 30px">
+ <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px">
       <table class="table table-striped">
       {% if property.count != 0 %}
-         {% for item in property %}
-             
-             <th>All Properties</th>
-             <tr>
-             <td>Proeprty ID</td><td>Property Title</td>
-             </tr>
+      <thead>
+    <tr>
+      <th scope="col">Property ID</th>
+      <th colspan="3" scope="col">Property Title</th>
+        <th scope="col">Property Price</th>
+        <th scope="col">Neighborhood</th>
+         <th scope="col">Home Type</th>
+        <th scope="col">Status</th>
+        <th scope="col">See Details</th>
+    </tr>
+  </thead>
         <tr>
            <tbody> 
+           {% for item in property %}
                <td>{{ item.property_id }} </td>
-        <td>{{ item.property_title }} </td>
-            
+        <td colspan="3">{{ item.property_title }} </td>
+          <td>${{ item.property_price }} </td>   
+        <td>{{ item.neighborhood }} </td>
+         <td>{{ item.home_type }} </td>
+          <td>{{ item.status }} </td>
+          <td><button style="background-color: blue; color: white;">See Details</button></td>
         </tr>
          {% endfor %}
      {% else %}
