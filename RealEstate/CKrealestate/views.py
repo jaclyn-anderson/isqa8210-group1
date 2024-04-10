@@ -37,7 +37,7 @@ def siteadminlanding(request):
         obj = Property.objects.get(property_id=record_id)
         # Update only if the form is submitted
         if 'price' in request.POST:
-            obj.property_price = request.POST.get('price')
+            obj.property_price = request.POST.get('price').replace(',', '')
         if 'status' in request.POST:
             obj.status = request.POST.get('status')
         if 'featured' in request.POST:

@@ -53,7 +53,7 @@ class Property(models.Model):
     property_city = models.CharField(max_length=100)
     property_state = models.CharField(max_length=2)
     property_zip_code = models.CharField(max_length=10, default='00000')
-    property_price = models.DecimalField(max_digits=12, decimal_places=0)
+    property_price = models.BigIntegerField()
     property_description = models.TextField(max_length=800)
     property_title = models.CharField(max_length=200)
     property_area = models.PositiveIntegerField(max_length=9)

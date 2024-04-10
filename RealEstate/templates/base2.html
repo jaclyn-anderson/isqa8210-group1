@@ -13,20 +13,18 @@
 <body>
       <header class="header">
             <div class="column">
-            
             </div>
             <div class="column"> 
                 <img src="{% static "images/logo.png" %}" class="logo" alt="logo" />
             </div>
-      
               <div class="column">
-                  <div class="menu" style="padding-bottom: 125px;">
+                  <div class="menu" style="padding-bottom: 50px;">
                      <ul style="float: right">
                          {% if user.is_authenticated %}
                         <li>
                             <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
-                            <button class="admin-btn" type="submit">Log Out</button>
+                            <button type="submit">Log Out</button>
                             </form>
                         </li> 
                          {% else %}
@@ -37,9 +35,11 @@
                     </div>
                  
               </div>
-    </header>
-    
-    <main>
+      <div class="column">
+              <h1>Welcome to the Admin Site!</h1>
+            </div>
+    </header>    
+    <main style="margin-top: 100px">
      
         {% block content %}{% endblock %}
     </main>
