@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Property, Contact
+from .models import Property, Contact, Property_Status
 from django.contrib.auth.decorators import login_required
 from .forms import PropertyForm
 
@@ -29,6 +29,8 @@ def omahalinks(request):
 @login_required
 def siteadminlanding(request):
     property = Property.objects.all()  # for all the records
+    status = Property_Status.objects.all().order_by('property_status_name')
+
     if request.method == 'POST':
         # Get the ID of the record being updated
         record_id = request.POST.get('property_id')
@@ -39,18 +41,25 @@ def siteadminlanding(request):
         if 'price' in request.POST:
             obj.property_price = request.POST.get('price').replace(',', '')
         if 'status' in request.POST:
-            obj.status = request.POST.get('status')
+            status_id = request.POST.get('status')
+            status = Property_Status.objects.get(property_status_id=status_id)
+            obj.status = status
         if 'featured' in request.POST:
+            Property.objects.exclude(property_id=record_id).update(property_featured=False)
             obj.property_featured = 'True'
         else:
             obj.property_featured = 'False'
+        if 'active' in request.POST:
+            obj.property_active = 'True'
+        else:
+            obj.property_active = 'False'
 
         # Mark other fields as read-only
         obj.editable = False
         obj.save()
         return redirect('siteadminlanding')
 
-    return render(request, 'siteadminlanding.html', {'property': property})
+    return render(request, 'siteadminlanding.html', {'property': property, 'status': status})
 
 
 def add_property(request):

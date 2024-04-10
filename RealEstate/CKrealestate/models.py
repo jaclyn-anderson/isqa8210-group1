@@ -1,7 +1,9 @@
 from django.db import models
 import datetime
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 
 
 class Property_Type(models.Model):
@@ -71,24 +73,6 @@ class Property(models.Model):
 
     def __int__(self):
         return self.property_id
-
-    # If the property is being marked as featured, ensure no other property is featured
-    def save(self, *args, **kwargs):
-        if self.property_featured:
-            # If property_feature is being set to True,
-            # set all other properties' property_feature to False
-            Property.objects.exclude(property_id=self.property_id).update(property_featured=False)
-            super(Property, self).save(*args, **kwargs)
-        else:
-            # If property_feature is being set to False,
-            # only update itself
-            try:
-                property_obj = Property.objects.get(property_id=self.property_id)
-                property_obj.property_featured = False
-                property_obj.save()
-            except ObjectDoesNotExist:
-                pass  # Property with given property_id does not exist
-            super(Property, self).save(*args, **kwargs)
 
 
 class Contact(models.Model):
