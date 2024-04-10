@@ -1,4 +1,5 @@
 {% extends 'base2.html' %}
+{% load humanize %}
 {% block content %}
     <hr>
 <div class="row">
@@ -10,12 +11,14 @@
        <p style="margin-left: 20px;">
             <a href="{% url 'add_property' %}" class="btn btn-info" style="background-color: blue; font-size: large; height: 40px; width: 200px;">Add Property</a>
        </p>
+  </div>
   <div class="col-sm-4">
         <p></p>
    </div>
    <div class="col-sm-4">
       <p style="margin-right: 20px; float: right">  <a href="#" class="btn btn-info" style="background-color: blue; font-size: large; width: 200px;">Reports</a></p>
     </div>
+</div>
 </div>
 <div class="row">
 <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px">
@@ -34,7 +37,7 @@
          <th scope="col">Featured</th>
         <th scope="col">Status</th>
         <th scope="col">Active</th>
-        <th scope="col">Update</th>
+        <th colspan="2" scope="col">Click to Update</th>
     </tr> 
   </thead>
       <tbody> 
@@ -47,8 +50,8 @@
                <td> <input type="text" name="property_id" value="{{ obj.property_id }}" hidden="hidden" >{{ obj.property_id }}  </td>
           <td colspan="3">{{ obj.property_title }} </td> 
         
-               <td>
-                   <input type="text" name="price" style="border: none; background: inherit;" value="{{ obj.property_price }}" >
+               <td style="width: 10%">
+                   <input type="text" name="price" style="border: none; background: inherit;" value="{{ obj.property_price|intcomma }}" >
                </td>
           <td>{{ obj.neighborhood }} </td>
          <td>{{ obj.home_type }} </td>
@@ -66,9 +69,9 @@
                 <input type="checkbox" class="styled-checkbox" name="active" style="margin-left: 25px"  {% if obj.property_active == True %} checked="checked"  {% endif %} disabled >
 
                </td>
-               <td>
+               <td style="width: 10%">
                 
-                    <button type="submit">Submit</button>
+                    <button type="submit">Click to Update</button>
                     
                    
                 </td>
