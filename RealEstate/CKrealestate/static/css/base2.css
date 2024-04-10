@@ -1,0 +1,125 @@
+body {
+    font-weight: 400;
+    font-size: 14px;
+    font-family: Outfit, sans-serif;
+    letter-spacing: .45px;
+    -webkit-font-smoothing: antialiased;
+    background-image: linear-gradient(to right, ghostwhite, lightblue, #AEDEFF);
+}
+
+.header {
+    justify-content: space-between; /* Distribute columns evenly */
+    align-items: center; /* Center content vertically */
+    padding: 10px; /* Adjust padding as needed */
+}
+
+.main {
+    min-height: 800px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: linear-gradient(to right, ghostwhite, lightblue, #AEDEFF);
+}
+
+.column {
+    flex: 1; /* Each column occupies equal space */
+    text-align: center; /* Center text horizontally */
+}
+
+.logo {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 130px;
+    background-size: contain; /* Adjust the background size as needed */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    border-radius: 5px;
+    float: left;
+}
+
+.home-pic {
+    padding-top: 20px;
+    height: 350px;
+    width: auto;
+    background-size: contain; /* Adjust the background size as needed */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
+.profile-pic {
+    width: 246px; /* Adjust the width and height as needed */
+    height: 369px;
+    background-size: contain; /* Adjust the background size as needed */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    box-shadow: 10px 10px 10px 10px;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 5px;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.menu ul li {
+    display: inline-block;
+    font-size: large;
+    font-weight: bold;
+}
+
+.menu li {
+    float: left;
+}
+
+.menu ul li:not(:last-child) {
+    margin-right: 10px; /* Adjust spacing between menu items */
+}
+
+.menu ul li span {
+    color: black; /* Color of the pipe */
+    margin: 0 5px; /* Adjust spacing around the pipe */
+
+}
+
+.menu ul li a {
+    text-decoration: underline;
+    color: #0073e5;
+}
+
+.menu ul li a:hover {
+    text-decoration: none;
+}
+
+.admin-btn {
+    background-color: white;
+    width: 140px;
+    font-size: medium;
+    border-color: grey;
+    color: black;
+    border-radius: 12px;
+}
+
+.gray-sm-line {
+    background-image: linear-gradient(to right, gray, lightgray);
+}
+
+.sm-gray-box {
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: lightgrey;
+    border-color: grey;
+    border-radius: 10% 10% 10% 10%;
+}
+
+.sm-login-box {
+    background-color: white;
+    width: 180px;
+    font-size: medium;
+    box-shadow: 10px 1px;
+    border-color: white;
+    color: gray;
+}
+
+.site-admin-btn {
+    background-color: blue;
+    font-size: large;
+    height: 40px;
+    width: 200px;
+}
