@@ -41,10 +41,9 @@ def siteadminlanding(request):
         if 'status' in request.POST:
             obj.status = request.POST.get('status')
         if 'featured' in request.POST:
-            if request.POST.get('featured') == 'on':
-                obj.property_featured = True
-            else:
-                obj.property_featured = False
+            obj.property_featured = 'True'
+        else:
+            obj.property_featured = 'False'
 
         # Mark other fields as read-only
         obj.editable = False

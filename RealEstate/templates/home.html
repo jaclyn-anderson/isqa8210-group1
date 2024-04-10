@@ -32,33 +32,15 @@
                {% endfor %}
          </div>
     </div>
+               </div>
     {% else %}
-                    <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Featured Property: Your Dream Home Awaits!</span></h2>
-        
-            <img src="{% static "images/featuredProperty.jpeg" %}" class="home-pic" alt="image"/>
-           <div style="padding-top: 20px"><button type="button" style="font-size: larger; width: 500px; display: flow; " href="" class="admin-btn" >
-               Click to View Details</button></div>
-        </div>
-         <div class="col-md-7" style="margin-left: 40px;margin-top: 50px;">
-             <div style="background-color: #eeeeee; padding: 1px; border-radius: 10px; width: auto;">
-                 <h2> <span style="font-weight: bold; font-size: 40px; ">$1,075,000</span></h2>
-             </div>
-             <div style="background-color: #eeeeee; padding: 1px; border-radius: 10px; width: auto;">
-                 <h3> <span style="font-weight: normal; font-size: 20px; ">15467 StarTrek Lane, Elkhorn, NE 68022</span></h3>
-             </div>
-             <div style="padding: 50px; width: auto;">
-                 <p style="font-size: 20px; text-align: center"> Must see five-bedroom house  within a gated community! Enjoy your view of the lake while relaxing in the living room or enjoying yourself outside from your patio.</p>
-             </div>
-
-             <div style="height: 50px; background-color: #eeeeee; width: auto; padding: 12px; border-radius: 5px; display: flex">
-                 <div style="width: 50%;"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Townhome</div>
-                 <div style="width: 50%;"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;Built in 2016</div>
-             </div>
-               
-         </div>
-    </div>            
+         
+               <div class="container" style="min-height: 200px; margin-left: 200px">
+               <img src="{% static "images/cover.png" %}" class="home-pic" style="float: right; margin-bottom: 50px">
+               </div>
+                  
   {% endif %}
-  </div> 
+  
 
        
        

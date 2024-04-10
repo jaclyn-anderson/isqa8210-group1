@@ -53,7 +53,7 @@
           <td>{{ obj.neighborhood }} </td>
          <td>{{ obj.home_type }} </td>
          <td>
-            <input type="checkbox" class="styled-checkbox" name="featured" id="featured" style="margin-left: 25px"  {% if obj.property_featured == True %} checked="checked" {% endif %}  onclick="onClickHandler()">
+            <input type="checkbox" class="styled-checkbox" name="featured" id="featured-{{ obj }}" style="margin-left: 25px"  {% if obj.property_featured == True %} checked="checked" {% endif %}  onclick="onClickHandler()">
           </td>     
           <td>
               <select name="status" style="border: none; background: inherit" disabled>

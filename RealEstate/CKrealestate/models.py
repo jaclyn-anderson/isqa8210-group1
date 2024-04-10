@@ -70,8 +70,15 @@ class Property(models.Model):
     # If the property is being marked as featured, ensure no other property is featured
     def save(self, *args, **kwargs):
         if self.property_featured:
+            # If property_feature is being set to True,
+            # set all other properties' property_feature to False
             Property.objects.exclude(property_id=self.property_id).update(property_featured=False)
-            super().save(*args, **kwargs)
+            super(Property, self).save(*args, **kwargs)
+        else:
+            # If property_feature is being set to False,
+            # only update itself
+            Property.objects.get(property_id=self.property_id).update(property_featured=False)
+            super(Property, self).save(*args, **kwargs)
 
 
 class Property_Photo(models.Model):
