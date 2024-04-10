@@ -83,7 +83,7 @@ class Property(models.Model):
 
 class Property_Photo(models.Model):
     property_photo_id = models.AutoField(primary_key=True, unique=True)
-    property_photo = models.ImageField(upload_to='static/images')
+    property_photo = models.ImageField(upload_to='uploads/')
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
 
 
@@ -98,7 +98,7 @@ class Contact(models.Model):
     contact_office_city = models.CharField(max_length=100)
     contact_office_state = models.CharField(max_length=2)
     contact_office_zip_code = models.CharField(max_length=10, default='00000')
-    contact_profile_image = models.ImageField(upload_to='static/images')
+    contact_profile_image = models.ImageField(upload_to='uploads/')
     contact_profile_description = models.TextField(max_length=800)
 
 

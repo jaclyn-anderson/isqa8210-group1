@@ -1,13 +1,14 @@
 <!-- profile.html -->
 
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     
     <div class="container" style="margin-top: 20px">
     <div class="row">
         <div class="col-sm-4">
             {% for item in contact %} 
-            <img style="float: left" src="{{ item.contact_profile_image }}" class="profile-pic" />
+            <img style="float: left" src="{{ item.contact_profile_image.url }}" class="profile-pic" />
         </div>
         <div class="col-sm-8" style="align-content: center; padding-top: 20px; box-shadow: gray">
             <h3>Realtor:  Carlos Kosala</h3>
