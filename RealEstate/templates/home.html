@@ -12,7 +12,7 @@
            {% if featured.count > 0 %}
             <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Featured Property: Your Dream Home Awaits!</span></h2>
         {% for item in featured %}
-            <img src="{% static "images/featuredProperty.jpeg" %}" class="home-pic"  alt="image"/>
+            <img src="{{ item.property_photo1.url }}" class="home-pic"  alt="image"/>
            <div style="padding-top: 20px"><button type="button" style="font-size: larger; width: fit-content;" href="" class="admin-btn" >
                Click to View Details</button></div>
         </div>

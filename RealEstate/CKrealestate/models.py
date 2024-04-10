@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class Property_Type(models.Model):
@@ -63,6 +64,10 @@ class Property(models.Model):
     property_bathroom_count = models.PositiveIntegerField(max_length=2)
     property_featured = models.BooleanField(default=False)
     property_active = models.BooleanField(default=True)
+    property_photo1 = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    property_photo2 = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    property_photo3 = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    property_photo4 = models.ImageField(upload_to='uploads/', null=True, blank=True)
 
     def __int__(self):
         return self.property_id
@@ -77,14 +82,13 @@ class Property(models.Model):
         else:
             # If property_feature is being set to False,
             # only update itself
-            Property.objects.get(property_id=self.property_id).update(property_featured=False)
+            try:
+                property_obj = Property.objects.get(property_id=self.property_id)
+                property_obj.property_featured = False
+                property_obj.save()
+            except ObjectDoesNotExist:
+                pass  # Property with given property_id does not exist
             super(Property, self).save(*args, **kwargs)
-
-
-class Property_Photo(models.Model):
-    property_photo_id = models.AutoField(primary_key=True, unique=True)
-    property_photo = models.ImageField(upload_to='uploads/')
-    property = models.ForeignKey(Property, on_delete=models.CASCADE)
 
 
 class Contact(models.Model):

@@ -1,4 +1,4 @@
-from .models import Property_Status, Property_Type, Property_Neighborhood, Property_Price_Range, Property, Contact, Property_Photo
+from .models import Property_Status, Property_Type, Property_Neighborhood, Property_Price_Range, Property, Contact
 from django.contrib import admin
 
 
@@ -31,7 +31,9 @@ class PropertyAdmin(admin.ModelAdmin):
     list_display = ('property_id', 'home_type', 'neighborhood', 'status', 'price_range', 'property_street_address',
                     'property_city', 'property_state', 'property_zip_code', 'property_price', 'property_description',
                     'property_title', 'property_area', 'property_year_built', 'property_bedroom_count',
-                    'property_bathroom_count', 'property_featured', 'property_active', )
+                    'property_bathroom_count', 'property_featured', 'property_active', 'property_photo1',
+                    'property_photo2', 'property_photo3', 'property_photo4',
+                    )
     search_fields = ('property_id', 'property_title', )
 
 
@@ -42,8 +44,4 @@ class ContactAdmin(admin.ModelAdmin):
                     'contact_website_link', 'contact_profile_description', 'contact_profile_image', )
 
 
-@admin.register(Property_Photo)
-class Property_PhotoAdmin(admin.ModelAdmin):
-    list_display = ('property_photo_id', 'property_photo', 'property')
-    search_fields = ('property_photo_id', 'property', )
 

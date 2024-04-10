@@ -1,5 +1,5 @@
 from django import forms
-from .models import Property, Property_Photo
+from .models import Property
 
 
 class PropertyForm(forms.ModelForm):
@@ -30,8 +30,3 @@ class PropertyForm(forms.ModelForm):
             'property_active': 'Active'
         }
 
-
-class PropertyPhotoForm(forms.ModelForm):
-    class Meta:
-        model = Property_Photo
-        fields = ['property_photo']
