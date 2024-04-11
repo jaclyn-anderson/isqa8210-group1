@@ -5,6 +5,7 @@ body {
     letter-spacing: .45px;
     -webkit-font-smoothing: antialiased;
     background-image: linear-gradient(to right, ghostwhite, lightblue, #AEDEFF);
+    overflow-x: hidden;
 }
 
 .header {
@@ -37,8 +38,8 @@ body {
 
 .home-pic {
     padding-top: 20px;
-    height: 350px;
-    width: auto;
+    max-height: 450px;
+    max-width: 450px;
     background-size: contain; /* Adjust the background size as needed */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
 }

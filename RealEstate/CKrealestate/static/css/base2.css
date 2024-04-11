@@ -5,6 +5,7 @@ body {
     letter-spacing: .45px;
     -webkit-font-smoothing: antialiased;
     background-image: linear-gradient(to right, ghostwhite, lightblue, #AEDEFF);
+    overflow-x: hidden;
 }
 
 .header {
@@ -119,7 +120,13 @@ body {
 
 .site-admin-btn {
     background-color: blue;
-    font-size: large;
-    height: 40px;
-    width: 200px;
+    color: floralwhite;
+    -webkit-box-align: center;
+    align-text: center;
+    font-size: medium;
+    padding: 2px;
+    width: 144px;
+    border-radius: 12px;
+    border-color: blue;
 }
+
