@@ -15,7 +15,6 @@
             <th colspan="10" style="text-align: center; background-color: blue; color: white; font-size: larger">All Listings</th>
         </tr>
     <tr>
-      <th scope="col">Property ID</th>
       <th colspan="3" scope="col">Property Title</th>
         <th scope="col">Property Price</th>
         <th scope="col">Neighborhood</th>
@@ -27,7 +26,7 @@
         <tr>
            <tbody> 
            {% for item in property %}
-               <td>{{ item.property_id }} </td>
+               <input type="text" name="property_id" value="{{ item.property_id }}" hidden="hidden" >
         <td colspan="3">{{ item.property_title }} </td>
           <td>${{ item.property_price|intcomma }} </td>   
         <td>{{ item.neighborhood }} </td>
@@ -38,8 +37,7 @@
          {% endfor %}
      {% else %}
         <tr>
-        <td style="width: 780px"></td>
-        <td colspan="6" style="font-size: larger">No Listings in Database</td>
+        <td colspan="6" style="font-size: larger; width: 100%; text-align: center">No Listings to show, check back soon!</td>
         <td></td>
         </tr>
      {% endif %}

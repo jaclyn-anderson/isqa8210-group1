@@ -44,6 +44,14 @@ body {
     background-repeat: no-repeat; /* Prevent the background image from repeating */
 }
 
+.cover-pic {
+    padding-top: 20px;
+    height: 300px;
+    width: auto;
+    background-size: contain; /* Adjust the background size as needed */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+}
+
 .profile-pic {
     width: 246px; /* Adjust the width and height as needed */
     height: 369px;
