@@ -62,13 +62,14 @@ def siteadminlanding(request):
     return render(request, 'siteadminlanding.html', {'property': property, 'status': status})
 
 
+@login_required
 def add_property(request):
     if request.method == 'POST':
         property_form = PropertyForm(request.POST, request.FILES)
 
         if property_form.is_valid():
             property = property_form.save()
-            return redirect('property-details', property_id=property.property_id)
+            return redirect('siteadminlanding')
     else:
         property_form = PropertyForm()
 
