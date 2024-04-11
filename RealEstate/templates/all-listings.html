@@ -9,7 +9,8 @@
 <div class="row">
  <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px">
       <table class="table table-striped table-bordered" style="border: 5px solid blue;">
-      {% if property.count != 0 %}
+      {% if active_count > 0 %}
+         
       <thead>
       <tr>
             <th colspan="10" style="text-align: center; background-color: blue; color: white; font-size: larger">All Listings</th>
@@ -41,8 +42,25 @@
         <td></td>
         </tr>
      {% endif %}
-      </tbody>
+      </tbody> 
       </table>
+ <div class="pagination" style="color: black">
+    <span class="step-links">
+        {% if property.has_previous %}
+            <a href="?page=1" style="padding: 2px">&laquo; first &raquo;</a>
+            <a href="?page={{ property.previous_page_number }}" style="padding: 2px>previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ property.number }} of {{ property.paginator.num_pages }}
+        </span>
+
+        {% if property.has_next %}
+            <a href="?page={{ property.next_page_number }}" style="padding: 2px">next</a>
+            <a href="?page={{ property.paginator.num_pages }}" style="padding: 2px"> &laquo; last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
  </div>
 </div>
 

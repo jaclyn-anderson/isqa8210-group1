@@ -42,7 +42,7 @@
         <th colspan="2" scope="col">Click to Update</th>
     </tr> 
   </thead>
-      <tbody> 
+      <tbody>
        {% for obj in property %}
         <tr>
         <form method="post"> 
@@ -78,6 +78,7 @@
                     
                    
                 </td>
+        
        </form>
         </tr>
          {% endfor %}
@@ -87,8 +88,24 @@
         <td colspan="6" style="font-size: larger">No Listings in Database</td>
         </tr> 
 {% endif %}
-</table>
+</table> 
+	<div class="pagination" style="color: black">
+    <span class="step-links">
+        {% if property.has_previous %}
+            <a href="?page=1" style="padding: 2px">&laquo; first &raquo;</a>
+            <a href="?page={{ property.previous_page_number }}" style="padding: 2px>previous</a>
+        {% endif %}
 
+        <span class="current">
+            Page {{ property.number }} of {{ property.paginator.num_pages }}
+        </span>
+
+        {% if property.has_next %}
+            <a href="?page={{ property.next_page_number }}" style="padding: 2px">next</a>
+            <a href="?page={{ property.paginator.num_pages }}" style="padding: 2px"> &laquo; last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 </div>
 </div>
     <script>

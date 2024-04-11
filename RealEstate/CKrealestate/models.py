@@ -66,7 +66,7 @@ class Property(models.Model):
     property_bathroom_count = models.PositiveIntegerField(max_length=2)
     property_featured = models.BooleanField(default=False)
     property_active = models.BooleanField(default=True)
-    property_photo1 = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    property_photo1 = models.ImageField(upload_to='uploads/')
     property_photo2 = models.ImageField(upload_to='uploads/', null=True, blank=True)
     property_photo3 = models.ImageField(upload_to='uploads/', null=True, blank=True)
     property_photo4 = models.ImageField(upload_to='uploads/', null=True, blank=True)

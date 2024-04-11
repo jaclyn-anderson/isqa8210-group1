@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Property, Contact, Property_Status
 from django.contrib.auth.decorators import login_required
 from .forms import PropertyForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def home(request):
@@ -11,9 +12,24 @@ def home(request):
 
 
 def all_listings(request):
-    property = Property.objects.all().order_by('property_id')
+    property1 = Property.objects.filter(property_active=True).all()
+    active_count = Property.objects.filter(property_active=True).count()
+    paginator = Paginator(property1, 2)  # 1 items per page
 
-    return render(request, 'all-listings.html', {'property': property})
+    page = request.GET.get('page')
+
+    try:
+        property = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        property = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        property = paginator.page(paginator.num_pages)
+
+
+
+    return render(request, 'all-listings.html', {'property': property, 'active_count': active_count})
 
 
 def profile(request):
@@ -28,9 +44,11 @@ def omahalinks(request):
 
 @login_required
 def siteadminlanding(request):
-    property = Property.objects.all()  # for all the records
+    property1 = Property.objects.all()  # for all the records
     status = Property_Status.objects.all().order_by('property_status_name')
+    paginator = Paginator(property1, 2)  # 1 items per page
 
+    page = request.GET.get('page')
     if request.method == 'POST':
         # Get the ID of the record being updated
         record_id = request.POST.get('property_id')
@@ -57,7 +75,18 @@ def siteadminlanding(request):
         # Mark other fields as read-only
         obj.editable = False
         obj.save()
-        return redirect('siteadminlanding')
+
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+    try:
+        property = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        property = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        property = paginator.page(paginator.num_pages)
 
     return render(request, 'siteadminlanding.html', {'property': property, 'status': status})
 
