@@ -5,10 +5,9 @@
 {% load humanize %}
 {% block title %}Home - My Website{% endblock %}
 {% block content %}
-    <div class="container-lg" style="margin-left: 50px;">
+    <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-        
            {% if featured.count > 0 %}
             <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Featured Property: Your Dream Home Awaits!</span></h2>
         {% for item in featured %}
@@ -16,28 +15,30 @@
            <div style="padding-top: 20px"><button type="button" style="font-size: larger; width: fit-content;" href="" class="admin-btn" >
                Click to View Details</button></div>
         </div>
-         <div class="col-md-4" style="margin-left: 80px;margin-top: 70px;">
-             <div style="background-color: #eeeeee; padding: 1px; border-radius: 10px; width: auto;">
-                 <h2> <span style="font-weight: bold; font-size: 40px; ">${{ item.property_price|intcomma }}</span></h2>
-                 <h3> <span style="font-weight: normal; font-size: 20px; ">{{ item.property_street_address}} 
-                     {{ item.property_city}}, {{ item.property_state}} {{ item.property_zip_code}}</span></h3>
+         <div class="col-md-8">
+             <div  style="margin-top: 80px; background-color: #eeeeee; padding: 1px; border-radius: 10px; width: 70%;">
+                 <h2> <span style="font-weight: bold; font-size: 40px; ">${{ item.property_price|intcomma }}</span>
+                     <br>
+                 <span style="font-weight: normal; font-size: 20px; ">{{ item.property_street_address}}
+                     {{ item.property_city}}, {{ item.property_state}} {{ item.property_zip_code}}</span>
+                 </h2>
              </div>
-             <div style="padding: 50px; width: auto;">
+             <div style="padding: 25px;width: 70%;">
                  <p style="font-size: 20px; text-align: center"> {{ item.property_title}}</p>
              </div>
-             
-             <div style="height: 50px; background-color: #eeeeee; width: auto; padding: 12px; border-radius: 5px; display: flex">
-                 <div style="width: 50%;"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;{{ item.home_type}}</div>
-                 <div style="width: 50%;"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;Built in {{ item.property_year_built}}</div>
+             <div style="height: 60px; width: 70%; border: 5px solid #eeeeee; border-radius: 10px; display: flex">
+                 <div style="width: 50%; background-color: #d3e5f6;border: 3px solid #eeeeee; align-content: center"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;{{ item.home_type}}</div>
+                 <div style="width: 50%; background-color: #d3e5f6; border: 3px solid #eeeeee; align-content: center"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;Built in {{ item.property_year_built}}</div>
              </div>
                {% endfor %}
          </div>
+
     </div>
                </div>
     {% else %}
 
-               <div class="container" style="min-height: 200px; margin-left: 40px">
-               <img src="{% static "images/cover.png" %}" class="home-pic" style="float: right; margin-bottom: 50px">
+               <div class="container" style="min-height: 200px;">
+               <img src="{% static "images/cover.png" %}" class="home-pic" style="float: right; margin-bottom: 50px" alt="No Photo Available">
                </div>
 
   {% endif %}
