@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% load static %}
 
 {% block title %}Add Property - My Website{% endblock %}
@@ -6,89 +6,89 @@
 {% block content %}
     <hr>
     <div class="row">
-        <div class="col-sm-12">
-            <h2>Add New Property</h2>
-        </div>
-    </div>
+    <p style="float: right; margin-right: 20px;"> <a href="{% url 'siteadminlanding' %}" class="btn site-admin-btn">Back to Main</a></p>
+   </div>
 
-    <div class="row">
-        <div class="col-sm-12">
+    <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px">
+        <table class="table" style="border: 5px solid blue;">
+            <thead>
+                <tr>
+                    <th colspan="11" style="text-align: center; background-color: blue; color: white; font-size: 18pt;">
+                        Add New Property
+                    </th>
+                </tr>
+            <tr>
+                <td>
+                    <div class="row">
+        <div class="col-sm-12" style="margin-left: 40px">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <!-- property fields -->
                 <div class="form-group">
                     <label for="{{ property_form.property_title.id_for_label }}">Property Title</label>
-                    {{ property_form.property_title }}
+                    <p>{{ property_form.property_title}}</p>
                 </div>
-                <div class="form-group">
-                    <label for="{{ property_form.home_type.id_for_label }}">Home Type</label>
-                    {{ property_form.home_type }}
-                </div>
-                <div class="form-group">
-                    <label for="{{ property_form.neighborhood.id_for_label }}">Neighborhood</label>
-                    {{ property_form.neighborhood }}
-                </div>
-                <div class="form-group">
-                    <label for="{{ property_form.status.id_for_label }}">Status</label>
-                    {{ property_form.status }}
-                </div>
-                <div class="form-group">
-                    <label for="{{ property_form.price_range.id_for_label }}">Price Range</label>
-                    {{ property_form.price_range }}
-                </div>
-                <div class="form-group">
+                                <div class="form-group">
                     <label for="{{ property_form.property_street_address.id_for_label }}">Street Address:</label>
                     {{ property_form.property_street_address }}
-                </div>
-                <div class="form-group">
                     <label for="{{ property_form.property_city.id_for_label }}">City:</label>
                     {{ property_form.property_city }}
-                </div>
-                <div class="form-group">
                     <label for="{{ property_form.property_state.id_for_label }}">State</label>
                     {{ property_form.property_state }}
-                </div>
-                <div class="form-group">
                     <label for="{{ property_form.property_zip_code.id_for_label }}">ZIP Code</label>
                     {{ property_form.property_zip_code }}
                 </div>
                 <div class="form-group">
+                    <label for="{{ property_form.price_range.id_for_label }}">Price Range</label>
+                    {{ property_form.price_range }}
                     <label for="{{ property_form.property_price.id_for_label }}">Price</label>
                     {{ property_form.property_price }}
+                    <label for="{{ property_form.home_type.id_for_label }}">Home Type</label>
+                    {{ property_form.home_type }}
+                    <label for="{{ property_form.neighborhood.id_for_label }}">Neighborhood</label>
+                    {{ property_form.neighborhood }}
+                    <label for="{{ property_form.status.id_for_label }}">Status</label>
+                    {{ property_form.status }}
                 </div>
-                <div class="form-group">
-                    <label for="{{ property_form.property_description.id_for_label }}">Description</label>
-                    {{ property_form.property_description }}
-                </div>
-                <div class="form-group">
+                  <div class="form-group">
                     <label for="{{ property_form.property_area.id_for_label }}">Area Square Footage</label>
                     {{ property_form.property_area }}
-                </div>
-                <div class="form-group">
                     <label for="{{ property_form.property_year_built.id_for_label }}">Year Built</label>
                     {{ property_form.property_year_built }}
-                </div>
-                <div class="form-group">
                     <label for="{{ property_form.property_bedroom_count.id_for_label }}">Bedrooms</label>
                     {{ property_form.property_bedroom_count }}
-                </div>
-                <div class="form-group">
                     <label for="{{ property_form.property_bathroom_count.id_for_label }}">Bathrooms</label>
                     {{ property_form.property_bathroom_count }}
                 </div>
 
 
                 <div class="form-group">
-                    <label for="{{ photo_form.property_photo.id_for_label }}">Property Photos</label>
-                    <p> Max 4 photos - Name photos starting with numbering 1-4, in the order you'd like them to show on the website
-                    Photo name starting with the number 1 will show on the landing page for featured property</p>
-                    {{ photo_form.property_photo }}
+                    <label for="{{ property_form.property_description.id_for_label }}">Description</label><br>
+                    {{ property_form.property_description }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ property_form.property_photo1.id_for_label }}">Photo 1</label>
+                    {{ property_form.property_photo1 }}
+                    <label for="{{ property_form.property_photo2.id_for_label }}">Photo 2</label>
+                    {{ property_form.property_photo2 }}
+                    <label for="{{ property_form.property_photo3.id_for_label }}">Photo 3</label>
+                    {{ property_form.property_photo3 }}
+                    <label for="{{ property_form.property_photo4.id_for_label }}">Photo 4</label>
+                    {{ property_form.property_photo4 }}
                 </div>
 
-               <div style="padding-top: 20px"><button type="button" style="font-size: larger; width: 500px;" href="" class="admin-btn" >
-               Review and Save</button></div>
+
+               <div style="padding-top: 20px"><button type="submit" style="font-size: larger; width: 500px;" href="" class="admin-btn" >
+               Submit</button></div>
             </form>
         </div>
     </div>
+                </td>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+
 {% endblock %}

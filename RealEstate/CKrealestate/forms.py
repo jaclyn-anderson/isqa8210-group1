@@ -9,6 +9,7 @@ class PropertyForm(forms.ModelForm):
                   'neighborhood', 'status', 'price_range', 'property_street_address', 'property_city', 'property_state',
                   'property_zip_code', 'property_price', 'property_description', 'property_title', 'property_area',
                   'property_year_built', 'property_bedroom_count', 'property_bathroom_count', 'property_active',
+                  'property_photo1', 'property_photo2', 'property_photo3', 'property_photo4',
                   ]
         labels = {
             'property_title': 'Title (100 characters)',
@@ -27,6 +28,10 @@ class PropertyForm(forms.ModelForm):
             'property_year_built': 'Year Built',
             'property_bedroom_count': 'Bedrooms',
             'property_bathroom_count': 'Bathrooms',
-            'property_active': 'Active'
+            'property_active': 'Active',
+            'property_photo1': 'Photo 1',
+            'property_photo2': 'Photo 2',
+            'property_photo3': 'Photo 3',
+            'property_photo4': 'Photo 4'
         }
 
