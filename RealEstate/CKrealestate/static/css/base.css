@@ -15,7 +15,7 @@ body {
 }
 
 .main {
-    min-height: 800px;
+    min-height: 1000px;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -40,14 +40,6 @@ body {
     padding-top: 20px;
     max-height: 450px;
     max-width: 450px;
-    background-size: contain; /* Adjust the background size as needed */
-    background-repeat: no-repeat; /* Prevent the background image from repeating */
-}
-
-.cover-pic {
-    padding-top: 20px;
-    height: 300px;
-    width: auto;
     background-size: contain; /* Adjust the background size as needed */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
 }

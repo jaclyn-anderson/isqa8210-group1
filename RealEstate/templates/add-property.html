@@ -9,7 +9,12 @@
     <p style="float: right; margin-right: 20px;"> <a href="{% url 'siteadminlanding' %}" class="btn site-admin-btn">Back to Main</a></p>
    </div>
 
-    <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px">
+    <div class="row" style="overflow-x:auto;">
+     <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px; width: 75%">
+         <p style="font-size: large"><b>To add a new property listing,</b> please complete all required fields 
+             and then click the button labeled <b>'Submit'</b> (fields that have a  <span class="text-danger" style="font-size: larger">*</span> 
+             are <b>Required</b>).
+                </p>
         <table class="table" style="border: 5px solid blue;">
             <thead>
                 <tr>
@@ -18,77 +23,97 @@
                     </th>
                 </tr>
             <tr>
+                
                 <td>
-                    <div class="row">
-        <div class="col-sm-12" style="margin-left: 40px">
+
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-
+                
                 <!-- property fields -->
                 <div class="form-group">
-                    <label for="{{ property_form.property_title.id_for_label }}">Property Title</label>
-                    <p>{{ property_form.property_title}}</p>
+                    <label for="id_property_title">{{ property_form.fields.property_title.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ property_form.property_title}}
                 </div>
-                                <div class="form-group">
-                    <label for="{{ property_form.property_street_address.id_for_label }}">Street Address:</label>
+                <div class="form-group">
+                    <label for="{{ property_form.property_street_address.id_for_label }}">Street Address <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_street_address }}
-                    <label for="{{ property_form.property_city.id_for_label }}">City:</label>
+                    <label for="{{ property_form.property_city.id_for_label }}">City <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_city }}
-                    <label for="{{ property_form.property_state.id_for_label }}">State</label>
+                    <label for="{{ property_form.property_state.id_for_label }}">State <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_state }}
-                    <label for="{{ property_form.property_zip_code.id_for_label }}">ZIP Code</label>
+                    <label for="{{ property_form.property_zip_code.id_for_label }}">Zip Code <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_zip_code }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ property_form.price_range.id_for_label }}">Price Range</label>
+                    <label for="{{ property_form.price_range.id_for_label }}">Price Range <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.price_range }}
-                    <label for="{{ property_form.property_price.id_for_label }}">Price</label>
+                    <label for="{{ property_form.property_price.id_for_label }}">Price <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_price }}
-                    <label for="{{ property_form.home_type.id_for_label }}">Home Type</label>
+                    <label for="{{ property_form.home_type.id_for_label }}">Home Type <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.home_type }}
-                    <label for="{{ property_form.neighborhood.id_for_label }}">Neighborhood</label>
+                    <label for="{{ property_form.neighborhood.id_for_label }}">Neighborhood <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.neighborhood }}
-                    <label for="{{ property_form.status.id_for_label }}">Status</label>
+                    <label for="{{ property_form.status.id_for_label }}">Status <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.status }}
                 </div>
+
                   <div class="form-group">
-                    <label for="{{ property_form.property_area.id_for_label }}">Area Square Footage</label>
+                    <label for="{{ property_form.property_area.id_for_label }}">Area Square Footage <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_area }}
-                    <label for="{{ property_form.property_year_built.id_for_label }}">Year Built</label>
+                    <label for="{{ property_form.property_year_built.id_for_label }}">Year Built <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_year_built }}
-                    <label for="{{ property_form.property_bedroom_count.id_for_label }}">Bedrooms</label>
+                    <label for="{{ property_form.property_bedroom_count.id_for_label }}">Bedrooms <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_bedroom_count }}
-                    <label for="{{ property_form.property_bathroom_count.id_for_label }}">Bathrooms</label>
+                    <label for="{{ property_form.property_bathroom_count.id_for_label }}">Bathrooms <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_bathroom_count }}
                 </div>
 
 
                 <div class="form-group">
-                    <label for="{{ property_form.property_description.id_for_label }}">Description</label><br>
+                    <label for="{{ property_form.property_description.id_for_label }}">Description <span class="text-danger" style="font-size: larger">*</span></label><br>
                     {{ property_form.property_description }}
                 </div>
-                <div class="form-group">
-                    <label for="{{ property_form.property_photo1.id_for_label }}">Photo 1</label>
-                    {{ property_form.property_photo1 }}
-                    <label for="{{ property_form.property_photo2.id_for_label }}">Photo 2</label>
-                    {{ property_form.property_photo2 }}
-                    <label for="{{ property_form.property_photo3.id_for_label }}">Photo 3</label>
-                    {{ property_form.property_photo3 }}
-                    <label for="{{ property_form.property_photo4.id_for_label }}">Photo 4</label>
-                    {{ property_form.property_photo4 }}
+                <div>
+                    <p style="padding-top: 10px; text-align: center; border: 3px solid blue;"><b>Note:</b> The photo labeled <b>'Photo 1'</b> will be the main photo displayed for your property. 
+                    If your property is marked as featured, it will be the only photo displayed on the Home page.
+                    </p>
+                </div>
+                <div class="form-group" >
+                   <p style="display: inline-block"> <label for="{{ property_form.property_photo1.id_for_label }}">Photo 1  <span class="text-danger" style="font-size: larger">*</span></label>
+                       {{ property_form.property_photo1 }}</p>
+                    <p style="display: inline-block"><label for="{{ property_form.property_photo2.id_for_label }}">Photo 2</label>
+                        {{ property_form.property_photo2 }}</p>
+                   <p style="display: inline-block"> <label for="{{ property_form.property_photo3.id_for_label }}">Photo 3</label>
+                       {{ property_form.property_photo3 }}</p>
+                   <p style="display: inline-block"> <label for="{{ property_form.property_photo4.id_for_label }}">Photo 4</label>
+                       {{ property_form.property_photo4 }}</p>
                 </div>
 
 
-               <div style="padding-top: 20px"><button type="submit" style="font-size: larger; width: 500px;" href="" class="admin-btn" >
-               Submit</button></div>
+               <button type="submit" style="font-size: larger; float: right" href="" class="admin-btn" >
+               Submit</button>
             </form>
-        </div>
-    </div>
+  
                 </td>
             </tr>
             </thead>
         </table>
+     </div>
     </div>
 
-
+<script>
+    // JavaScript code to limit input length
+    document.getElementById("id_property_title").addEventListener("input", function() {
+        if (this.value.length > 100) {
+            this.value = this.value.slice(0, 100);
+        }
+    });
+    
+    // JavaScript code to limit input length for property_description
+    document.getElementById("id_property_description").addEventListener("input", function() {
+        if (this.value.length > 800) {
+            this.value = this.value.slice(0, 800);
+        }
+    });
+</script>
 {% endblock %}

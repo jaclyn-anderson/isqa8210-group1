@@ -12,18 +12,24 @@
             <a href="{% url 'add_property' %}" class="btn site-admin-btn">Add Property</a>
        </p>
   </div>
-  <div class="col-sm-4">
+   <div class="col-sm-4">
         <p></p>
    </div>
-   <div class="col-sm-4">
-      <p style="margin-right: 100px; float: right">  <a href="#" class="btn site-admin-btn">Reports</a></p>
+    <div class="col-sm-3">
+      <p style="overflow-x: auto; float: right">  <a href="#" class="btn site-admin-btn">Reports</a></p>
     </div>
 </div>
 
-<div class="row">
-<div class="col-sm-10" style="margin-left: 100px; float: left; margin-top: 30px">
-
-      <table class="table table-striped table-bordered" style="border: 5px solid blue;">
+<div class="row" style="overflow-x: auto">
+<div class="col-sm-10" style="margin-left: 120px; float: left; margin-top: 30px;">
+    <p style="font-size: large"> <b>To update a Property</b> make edits within the row of the property 
+            you would like to update. You can update the price, status, mark as featured or unmark, and/or 
+        remove the property from the site. Once your edits are complete, click the button <b>'Click to Update'</b> 
+        for the row you edited.
+        </p>
+   
+<div style="overflow-x: auto">
+ <table class="table table-striped table-bordered" style="border: 5px solid blue;">
       {% if property.count != 0 %}
          
      <thead>
@@ -77,7 +83,7 @@
                     <button type="submit">Click to Update</button>
                     
                    
-                </td>
+          </td>
         
        </form>
         </tr>
@@ -89,6 +95,7 @@
         </tr> 
 {% endif %}
 </table> 
+
 	<div class="pagination" style="color: black">
     <span class="step-links">
         {% if property.has_previous %}
@@ -105,9 +112,11 @@
             <a href="?page={{ property.paginator.num_pages }}" style="padding: 2px"> &laquo; last &raquo;</a>
         {% endif %}
     </span>
+   </div>
 </div>
 </div>
 </div>
+
     <script>
     function onClickHandler(){
     var chk=document.getElementById("featured").value;

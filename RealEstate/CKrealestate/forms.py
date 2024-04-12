@@ -12,7 +12,7 @@ class PropertyForm(forms.ModelForm):
                   'property_photo1', 'property_photo2', 'property_photo3', 'property_photo4',
                   ]
         labels = {
-            'property_title': 'Title (100 characters)',
+            'property_title': 'Property Title (100 characters)',
             'property_description': 'Description',
             'property_price': 'Price',
             'property_id': 'ID',
@@ -34,4 +34,7 @@ class PropertyForm(forms.ModelForm):
             'property_photo3': 'Photo 3',
             'property_photo4': 'Photo 4'
         }
-
+        widgets = {
+            'property_description': forms.Textarea(attrs={'rows': 5, 'cols': 150}),
+            'property_title': forms.TextInput(attrs={'style': 'width: 700px;'}),  # Adjust width as neede
+        }

@@ -6,15 +6,15 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def home(request):
-    featured = Property.objects.filter(property_featured=True)
+    featured = Property.objects.filter(property_featured=True, property_active=True)
 
     return render(request, 'home.html', {'featured': featured})
 
 
 def all_listings(request):
-    property1 = Property.objects.filter(property_active=True).all()
+    property1 = Property.objects.filter(property_active=True).all().order_by('property_id')
     active_count = Property.objects.filter(property_active=True).count()
-    paginator = Paginator(property1, 2)  # 1 items per page
+    paginator = Paginator(property1, 5)  # 1 items per page
 
     page = request.GET.get('page')
 
@@ -44,9 +44,9 @@ def omahalinks(request):
 
 @login_required
 def siteadminlanding(request):
-    property1 = Property.objects.all()  # for all the records
+    property1 = Property.objects.all().order_by('property_id')  # for all the records
     status = Property_Status.objects.all().order_by('property_status_name')
-    paginator = Paginator(property1, 2)  # 1 items per page
+    paginator = Paginator(property1, 5)  # 1 items per page
 
     page = request.GET.get('page')
     if request.method == 'POST':
