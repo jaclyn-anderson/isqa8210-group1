@@ -66,7 +66,7 @@ class Property(models.Model):
     property_bathroom_count = models.PositiveIntegerField(null=False, blank=False, default=0)
     property_featured = models.BooleanField(default=False)
     property_active = models.BooleanField(default=True)
-    property_photo1 = models.ImageField(upload_to='uploads/')
+    property_photo1 = models.ImageField(upload_to='uploads/', null=False, blank=False)
     property_photo2 = models.ImageField(upload_to='uploads/', null=True, blank=True)
     property_photo3 = models.ImageField(upload_to='uploads/', null=True, blank=True)
     property_photo4 = models.ImageField(upload_to='uploads/', null=True, blank=True)
@@ -77,17 +77,17 @@ class Property(models.Model):
 
 class Contact(models.Model):
     contact_id = models.AutoField(primary_key=True, unique=True)
-    contact_first_name = models.CharField(max_length=100)
-    contact_last_name = models.CharField(max_length=100)
-    contact_phone = models.CharField(max_length=20,default='(402)000-0000')
+    contact_first_name = models.CharField(max_length=100, blank=False, null=False)
+    contact_last_name = models.CharField(max_length=100, blank=False, null=False)
+    contact_phone = models.CharField(max_length=20,default='(402)000-0000', blank=False, null=False)
     contact_email = models.EmailField
-    contact_website_link = models.CharField(max_length=200)
-    contact_office_street_address = models.CharField(max_length=100)
-    contact_office_city = models.CharField(max_length=100)
-    contact_office_state = models.CharField(max_length=2)
-    contact_office_zip_code = models.CharField(max_length=10, default='00000')
-    contact_profile_image = models.ImageField(upload_to='uploads/')
-    contact_profile_description = models.TextField(max_length=800)
+    contact_website_link = models.CharField(max_length=200, blank=False, null=False)
+    contact_office_street_address = models.CharField(max_length=100, blank=False, null=False)
+    contact_office_city = models.CharField(max_length=100, blank=False, null=False)
+    contact_office_state = models.CharField(max_length=2, blank=False, null=False)
+    contact_office_zip_code = models.CharField(max_length=10, default='00000', blank=False, null=False)
+    contact_profile_image = models.ImageField(upload_to='uploads/', null=False , blank=False)
+    contact_profile_description = models.TextField(max_length=800, blank=False, null=False)
 
 
 class Search_Log(models.Model):
