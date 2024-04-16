@@ -27,8 +27,6 @@ def all_listings(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         property = paginator.page(paginator.num_pages)
 
-
-
     return render(request, 'all-listings.html', {'property': property, 'active_count': active_count})
 
 
@@ -106,5 +104,31 @@ def add_property(request):
         'property_form': property_form
     })
 
+
+
+def share_property(request, pk):
+    # Retrieve property post by id
+    property = get_object_or_404(Post, pk=pk, status='published')
+    sent = False
+    if request.method == 'POST':
+        # Form was submitted
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            # Form fields passed validation
+            cd = form.cleaned_data
+            property_url = request.build_absolute_uri(
+                property.get_absolute_url())
+            subject = f"{cd['name']} requests more information on " \
+                      f"{property.title}"
+            message = f"Read {property.title} at {property_url}\n\n" \
+                      f"{cd['name']}\'s comments: {cd['comments']}"
+            send_mail(subject, message, {cd['email_from']},
+                      [cd['email_to']])
+            sent = True
+    else:
+        form = EmailPostForm()
+    return render(request, 'share-property.html', {'property': property,
+                                                    'form': form,
+                                                    'sent': sent})
 
 
