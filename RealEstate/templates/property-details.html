@@ -2,6 +2,7 @@
 
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 
     <div class="container" style="margin-top: 20px">
@@ -14,7 +15,6 @@
         <div class="col-sm-8" style="align-content: center; padding-top: 20px; box-shadow: gray">
             <h3>Property Details</h3>
             <p>
-           {% for item in property %}
                <input type="text" name="property_id" value="{{ item.property_id }}" hidden="hidden" >
         <p>{{ item.property_title }} </p>
           <p>${{ item.property_price|intcomma }} </p>
@@ -33,6 +33,7 @@
     {% endfor %}
     {% endif %}
         </div>
+    </div>
     <!-- Add your home page content here -->
 {% endblock %}
 
