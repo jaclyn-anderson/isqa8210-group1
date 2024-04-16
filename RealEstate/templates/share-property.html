@@ -6,10 +6,10 @@
   {% if sent %}
     <h1>Request information email successfully sent</h1>
     <p>
-      "{{ .title }}" was successfully sent to Carlos Kosalas.
+      "{{ property.title }}" was successfully sent to Carlos Kosalas.
     </p>
   {% else %}
-    <h1>Share "{{ recipe.title }}" by e-mail</h1>
+    <h1>Share "{{ property.title }}" by e-mail</h1>
     <form method="post">
       {{ form.as_p }}
       {% csrf_token %}
