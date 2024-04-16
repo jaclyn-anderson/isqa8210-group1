@@ -104,9 +104,9 @@ def add_property(request):
         'property_form': property_form
     })
 
-def property_details(request, pk):
-    property_details = Property.objects.all()
-    return render(request, 'property-details.html', {'property': property})
+def property_details(request, property_id):
+    property_details = Property.objects.filter(property_id=property_id)
+    return render(request, 'property-details.html', {'property_details': property_details})
 
 def share_property(request, pk):
     # Retrieve property post by id

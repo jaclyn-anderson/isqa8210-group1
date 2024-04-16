@@ -7,8 +7,8 @@
     <div class="container" style="margin-top: 20px">
     <div class="row">
         <div class="col-sm-4">
-        {% if property.count > 0 %}
-            {% for item in property %}
+        {% if property_details.count > 0 %}
+            {% for item in property_details %}
             <img style="float: left" src="{{ item.property_photo1.url }}" class="home-pic" />
         </div>
         <div class="col-sm-8" style="align-content: center; padding-top: 20px; box-shadow: gray">
@@ -17,8 +17,8 @@
             <p style="word-wrap: break-word">{{ item.property_property_description }}</p>
                 <div class="row">
                     <div class="col-12 d-grip gap-2 d-md-block">
-                        <a class="btn btn-block btn-secondary" href="{% url 'share-property' pk=property.pk %}">Request Information</a>
-                        <a class="btn btn-block btn-primary" href="{% url 'all-listings' %}">Back to property list</a>
+                        <a class="btn btn-block btn-secondary" href="">Request Information</a>
+                        <a class="btn btn-block btn-primary" href="{% url 'all_listings' %}">Back to property list</a>
                     </div>
                 </div>
        </div>
