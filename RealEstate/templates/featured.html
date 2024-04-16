@@ -1,0 +1,49 @@
+<!-- home.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}Featured Property{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+           {% if featured.count > 0 %}
+            <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Featured Property: Your Dream Home Awaits!</span></h2>
+        {% for item in featured %}
+            <img src="{{ item.property_photo1.url }}" class="home-pic"  alt="image"/>
+           <div style="padding-top: 20px"; style="font-size: larger; width: fit-content;"</div>
+        </div>
+         <div class="col-md-8">
+             <div  style="margin-top: 80px; background-color: #eeeeee; padding: 1px; border-radius: 10px; width: 70%;">
+                 <h2> <span style="font-weight: bold; font-size: 40px; ">${{ item.property_price|intcomma }}</span>
+                     <br>
+                 <span style="font-weight: normal; font-size: 20px; ">{{ item.property_street_address}}
+                     {{ item.property_city}}, {{ item.property_state}} {{ item.property_zip_code}}</span>
+                 </h2>
+             </div>
+             <div style="padding: 25px;width: 70%;">
+                 <p style="font-size: 20px; text-align: center"> {{ item.property_title}}</p>
+             </div>
+
+               {% endfor %}
+         </div>
+
+    </div>
+               </div>
+    {% else %}
+            <div class="container" style="align-content: center">
+            <div class="col-sm-4">
+                <p></p>
+            </div>
+               <div class="col-sm-8" style="width: 100%; align-content: center">
+               <img src="{% static "images/cover.png" %}" class="img-fluid"  style="margin-bottom: 50px; max-width: 100%; height: auto;" alt="No Photo Available">
+               </div>
+            </div>
+
+  {% endif %}
+
+
+
+
+{% endblock %}

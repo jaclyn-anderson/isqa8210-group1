@@ -13,7 +13,15 @@
         </div>
         <div class="col-sm-8" style="align-content: center; padding-top: 20px; box-shadow: gray">
             <h3>Property Details</h3>
-
+            <p>
+           {% for item in property %}
+               <input type="text" name="property_id" value="{{ item.property_id }}" hidden="hidden" >
+        <p>{{ item.property_title }} </p>
+          <p>${{ item.property_price|intcomma }} </p>
+        <p>{{ item.neighborhood }} </p>
+         <p>{{ item.home_type }} </p>
+          <p>{{ item.status }} </p>
+         </p>
             <p style="word-wrap: break-word">{{ item.property_property_description }}</p>
                 <div class="row">
                     <div class="col-12 d-grip gap-2 d-md-block">

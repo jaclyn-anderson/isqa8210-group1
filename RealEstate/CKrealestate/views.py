@@ -10,6 +10,11 @@ def home(request):
 
     return render(request, 'home.html', {'featured': featured})
 
+def featured(request, pk):
+    featured = Property.objects.filter(property_featured=True, property_active=True)
+    property_details = Property.objects.all()
+    return render(request, 'featured.html', {'featured': featured})
+
 
 def all_listings(request):
     property1 = Property.objects.filter(property_active=True).all().order_by('property_id')
