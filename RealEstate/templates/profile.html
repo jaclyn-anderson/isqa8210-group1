@@ -9,22 +9,23 @@
      <div class="col-sm-4">
          {% if contact.count > 0 %}
             {% for item in contact %}
-         <h2 style="width: 100%;"> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px;">Realtor: {{ item.contact_first_name  }} {{ item.contact_last_name  }}</span></h2>
-         <img style="float: left;" src="{{ item.contact_profile_image.url }}" class="profile-pic" /> 
-                <div style="padding-top: 20px"><a style="font-size: larger; width: fit-content;" href="" class="btn admin-btn" >
+         <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Realtor: {{ item.contact_first_name  }} {{ item.contact_last_name  }} &nbsp;</span></h2>
+         <img style="padding-top: 20px" src="{{ item.contact_profile_image.url }}" class="profile-pic" /> 
+              <div style="padding-top: 20px"><a style="font-size: larger; width: fit-content;" href="{% url 'contact_realtor' %}" class="btn admin-btn" >
                Click to Contact Realtor</a></div>
      </div>
-        <div class="col-sm-8" style="align-content: center; padding-top: 100px; box-shadow: gray">
+        <div class="col-sm-8" style="align-content: center; padding-top: 130px; box-shadow: gray">
             
-            <p style="word-wrap: break-word">{{ item.contact_profile_description }}</p>
-            <table>
+            <p style="word-wrap: break-word; font-size: 20px;">{{ item.contact_profile_description }}</p>
+            <br>
+            <table style="font-size: 20px;">
             <tr> 
                 <td style="width: 50%">CK Real Estate</td>
                 <td> {{ item.contact_website_link }}</td>
             </tr>
             <tr>
                 <td>{{ item.contact_office_street_address}}</td>
-                <td>{{ item.contact_phone}}</td>                
+                <td>Office: {{ item.contact_phone}}</td>                
             </tr>
             <tr>
                 <td>{{ item.contact_office_city}} , {{ item.contact_office_state }} &nbsp;{{ item.contact_office_zip_code }}</td>
@@ -36,5 +37,13 @@
     {% endif %}
         </div>
     </div>
-    <!-- Add your home page content here -->
+    <script>
+        window.onload = function() {
+            // Display popup message if it exists
+            var successMessage = "{{ success_message }}";
+            if (successMessage && successMessage !== "None") {
+                alert(successMessage);
+            }
+        };
+    </script>
 {% endblock %}

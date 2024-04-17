@@ -3,6 +3,8 @@ from .models import Property, Contact, Property_Status
 from django.contrib.auth.decorators import login_required
 from .forms import PropertyForm, ProfileForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
 
 
 def home(request):
@@ -37,8 +39,16 @@ def all_listings(request):
 
 def profile(request):
     contact = Contact.objects.all()
+    success_message = None
+    if request.GET.get('success_message') == 'true':
+        success_message = 'Your email was sent successfully!'
+        # Remove the 'success_message' query parameter from the URL
+        return HttpResponseRedirect(request.path)
 
-    return render(request, 'profile.html', {"contact": contact})
+    return render(request, 'profile.html', {"contact": contact,
+                                            "success_message": success_message})
+
+  #  return render(request, 'profile.html', {"contact": contact})
 
 
 def omahalinks(request):
@@ -122,6 +132,24 @@ def update_profile(request):
 
     return render(request, 'update-profile.html', {'form': form})
 
+
+def contact_realtor(request):
+    if request.method == 'POST':
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+        phone = request.POST.get('phone', '')
+        subject = request.POST.get('subject', '')
+
+        # Perform basic validation
+        if not (name and email and subject):
+            return render(request, 'contact-realtor.html', {'error_message': 'Please fill in all required fields.'})
+
+        message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\n{subject}'
+        recipient_email = 'janderson052024@gmail.com'
+        send_mail('Contact Form Submission', message, email, [recipient_email])
+        return render(request, 'profile.html', {'success_message': 'Your email was sent successfully!'})
+    else:
+        return render(request, 'contact-realtor.html')
 
 def property_details(request, property_id):
     property_details = Property.objects.filter(property_id=property_id)
