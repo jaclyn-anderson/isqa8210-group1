@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Property, Contact, Property_Status
 from django.contrib.auth.decorators import login_required
-from .forms import PropertyForm
+from .forms import PropertyForm, ProfileForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -109,9 +109,24 @@ def add_property(request):
         'property_form': property_form
     })
 
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+
+        if form.is_valid():
+            return redirect('siteadminlanding')
+    else:
+        form = ProfileForm()
+
+    return render(request, 'update-profile.html', {'form': form})
+
+
 def property_details(request, property_id):
     property_details = Property.objects.filter(property_id=property_id)
     return render(request, 'property-details.html', {'property_details': property_details})
+
 
 def share_property(request, pk):
     # Retrieve property post by id
@@ -137,5 +152,9 @@ def share_property(request, pk):
     return render(request, 'share-property.html', {'property': property,
                                                     'form': form,
                                                     'sent': sent})
+
+
+
+
 
 

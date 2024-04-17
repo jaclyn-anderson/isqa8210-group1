@@ -6,23 +6,35 @@
     
     <div class="container" style="margin-top: 20px">
     <div class="row">
-        <div class="col-sm-4">
-        {% if contact.count > 0 %}
-            {% for item in contact %} 
-            <img style="float: left" src="{{ item.contact_profile_image.url }}" class="profile-pic" />
-        </div>
-        <div class="col-sm-8" style="align-content: center; padding-top: 20px; box-shadow: gray">
-            <h3>Realtor:  Carlos Kosala</h3>
+     <div class="col-sm-4">
+         {% if contact.count > 0 %}
+            {% for item in contact %}
+         <h2 style="width: 100%;"> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px;">Realtor: {{ item.contact_first_name  }} {{ item.contact_last_name  }}</span></h2>
+         <img style="float: left;" src="{{ item.contact_profile_image.url }}" class="profile-pic" /> 
+                <div style="padding-top: 20px"><a style="font-size: larger; width: fit-content;" href="" class="btn admin-btn" >
+               Click to Contact Realtor</a></div>
+     </div>
+        <div class="col-sm-8" style="align-content: center; padding-top: 100px; box-shadow: gray">
             
             <p style="word-wrap: break-word">{{ item.contact_profile_description }}</p>
-             <ul style="list-style-type: none;">
-                <li>CK Real Estate: {{ item.contact_website_link }}</li>
-                <li>Office Address: {{ item.contact_office_street_address}}</li>
-             <li>{{ item.contact_office_city}} , {{ item.contact_office_state }} &nbsp;{{ item.contact_office_zip_code }}</li>
-            </ul>
-       </div>
+            <table>
+            <tr> 
+                <td style="width: 50%">CK Real Estate</td>
+                <td> {{ item.contact_website_link }}</td>
+            </tr>
+            <tr>
+                <td>{{ item.contact_office_street_address}}</td>
+                <td>{{ item.contact_phone}}</td>                
+            </tr>
+            <tr>
+                <td>{{ item.contact_office_city}} , {{ item.contact_office_state }} &nbsp;{{ item.contact_office_zip_code }}</td>
+                <td>Email: {{ item.contact_email}}</td>
+            </tr>
+            </table> 
+       </div> 
     {% endfor %}
     {% endif %}
         </div>
+    </div>
     <!-- Add your home page content here -->
 {% endblock %}

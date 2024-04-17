@@ -49,7 +49,6 @@ body {
     height: 369px;
     background-size: contain; /* Adjust the background size as needed */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
-    box-shadow: 10px 10px 10px 10px;
 }
 
 .menu ul {
