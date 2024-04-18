@@ -9,7 +9,7 @@
     <div class="row">
         <form method="post" action="{% url 'search_all_listings' %}">
             {% csrf_token %}
-            <div class= "col-sm-2" style="margin-left: 150px; margin-top: 30px; overflow-x:auto;">
+            <div class= "col-sm-2" style="margin-left: 150px; margin-top: 30px;">
                 <select name="price_range_id" id="price_range_id" aria-label="Select Price Range" style="padding: 5px; border-radius: 5px">
                     <option value="">Select Price Range</option>
                     {% for item in property_price_range %}
@@ -19,7 +19,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class= "col-sm-2" style="margin-top: 30px; overflow-x:auto;">
+            <div class= "col-sm-2" style="margin-top: 30px;">
                 <select name="neighborhood_id" id="neighborhood_id" aria-label="Select Neighborhood" style="padding: 5px; border-radius: 5px">
                     <option value="">Select Neighborhood</option>
                     {% for item in property_neighborhood %}
@@ -28,7 +28,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <div  class= "col-sm-2" style="margin-top: 30px; overflow-x:auto;">
+            <div  class= "col-sm-2" style="margin-top: 30px;">
                 <select name="home_type_id" id="home_type_id" aria-label="Select Home Type" style="padding: 5px; border-radius: 5px">
                     <option value="">Select Home Type</option>
                     {% for item in property_home_type %}
