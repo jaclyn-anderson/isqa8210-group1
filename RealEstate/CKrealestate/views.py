@@ -2,14 +2,21 @@ from django.shortcuts import render, redirect
 from .models import Property, Contact, Property_Status, Property_Price_Range, Property_Neighborhood, Property_Type, \
     Search_Log
 from django.contrib.auth.decorators import login_required
-from .forms import PropertyForm
+from .forms import PropertyForm, ProfileForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
 
 
 def home(request):
     featured = Property.objects.filter(property_featured=True, property_active=True)
 
     return render(request, 'home.html', {'featured': featured})
+
+def featured(request, pk):
+    featured = Property.objects.filter(property_featured=True, property_active=True)
+    property_details = Property.objects.all()
+    return render(request, 'featured.html', {'featured': featured})
 
 
 def all_listings(request):
@@ -28,15 +35,21 @@ def all_listings(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         property = paginator.page(paginator.num_pages)
 
-
-
     return render(request, 'all-listings.html', {'property': property, 'active_count': active_count})
 
 
 def profile(request):
     contact = Contact.objects.all()
+    success_message = None
+    if request.GET.get('success_message') == 'true':
+        success_message = 'Your email was sent successfully!'
+        # Remove the 'success_message' query parameter from the URL
+        return HttpResponseRedirect(request.path)
 
-    return render(request, 'profile.html', {"contact": contact})
+    return render(request, 'profile.html', {"contact": contact,
+                                            "success_message": success_message})
+
+  #  return render(request, 'profile.html', {"contact": contact})
 
 
 def omahalinks(request):
@@ -106,6 +119,72 @@ def add_property(request):
     return render(request, 'add-property.html', {
         'property_form': property_form
     })
+
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('siteadminlanding')
+    else:
+        form = ProfileForm()
+
+    return render(request, 'update-profile.html', {'form': form})
+
+
+def contact_realtor(request):
+    if request.method == 'POST':
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+        phone = request.POST.get('phone', '')
+        subject = request.POST.get('subject', '')
+
+        # Perform basic validation
+        if not (name and email and subject):
+            return render(request, 'contact-realtor.html', {'error_message': 'Please fill in all required fields.'})
+
+        message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\n{subject}'
+        recipient_email = 'janderson052024@gmail.com'
+        send_mail('Contact Form Submission', message, email, [recipient_email])
+        return render(request, 'profile.html', {'success_message': 'Your email was sent successfully!'})
+    else:
+        return render(request, 'contact-realtor.html')
+
+def property_details(request, property_id):
+    property_details = Property.objects.filter(property_id=property_id)
+    return render(request, 'property-details.html', {'property_details': property_details})
+
+
+def share_property(request, pk):
+    # Retrieve property post by id
+    property = get_object_or_404(Post, pk=pk, status='published')
+    sent = False
+    if request.method == 'POST':
+        # Form was submitted
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            # Form fields passed validation
+            cd = form.cleaned_data
+            property_url = request.build_absolute_uri(
+                property.get_absolute_url())
+            subject = f"{cd['name']} requests more information on " \
+                      f"{property.title}"
+            message = f"Read {property.title} at {property_url}\n\n" \
+                      f"{cd['name']}\'s comments: {cd['comments']}"
+            send_mail(subject, message, {cd['email_from']},
+                      [cd['email_to']])
+            sent = True
+    else:
+        form = EmailPostForm()
+    return render(request, 'share-property.html', {'property': property,
+                                                    'form': form,
+                                                    'sent': sent})
+
+
+
 
 
 def search_all_listings(request):

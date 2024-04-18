@@ -45,11 +45,11 @@ body {
 }
 
 .profile-pic {
-    width: 246px; /* Adjust the width and height as needed */
-    height: 369px;
+    padding-top: 20px;
+    max-width: 246px; /* Adjust the width and height as needed */
+    max-height: 369px;
     background-size: contain; /* Adjust the background size as needed */
     background-repeat: no-repeat; /* Prevent the background image from repeating */
-    box-shadow: 10px 10px 10px 10px;
 }
 
 .menu ul {

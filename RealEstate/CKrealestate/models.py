@@ -80,7 +80,7 @@ class Contact(models.Model):
     contact_first_name = models.CharField(max_length=100, blank=False, null=False)
     contact_last_name = models.CharField(max_length=100, blank=False, null=False)
     contact_phone = models.CharField(max_length=20,default='(402)000-0000', blank=False, null=False)
-    contact_email = models.EmailField
+    contact_email = models.EmailField(max_length=300)
     contact_website_link = models.CharField(max_length=200, blank=False, null=False)
     contact_office_street_address = models.CharField(max_length=100, blank=False, null=False)
     contact_office_city = models.CharField(max_length=100, blank=False, null=False)

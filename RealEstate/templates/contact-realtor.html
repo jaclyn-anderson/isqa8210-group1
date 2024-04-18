@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Realtor - CK Real Estate{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 20px">
+<div class="col-sm-10">
+    <p style="font-size: large"><b>To send an email to the Realtor,</b> please complete all required fields 
+             and then click the button labeled <b>'Send Email'</b> (fields that have a  <span class="text-danger" style="font-size: larger">*</span> 
+             are <b>Required</b>).
+                </p>
+        <table class="table" style="border: 5px solid blue;">
+             <form method="post" action="{% url 'contact_realtor' %}">
+                    {% csrf_token %}
+            <thead>
+                <tr>
+                    <th colspan="11" style="text-align: center; background-color: blue; color: white; font-size: 18pt;">
+                        Contact Realtor
+                    </th>
+                </tr>
+                <tr>
+              
+                        <td>        
+                        <label for="id_name">Name <span class="text-danger">*</span></label>
+                        <input type="text" style="width: 400px" id="id_name" name="name">
+                        </td>
+                        <td>
+                        <label for="id_phone">Phone <span class="text-danger">*</span></label>
+                        <input type="tel" id="id_phone" name="phone">
+                        </td>
+                        <td>
+                        <label for="id_email">Email <span class="text-danger">*</span></label>
+                        <input type="email" style="width: 500px" id="id_email" name="email">
+                        </td>
+                 </tr> 
+                    <tr>
+                        <td colspan="3">   
+                        <label for="id_subject">Comments/Questions <span class="text-danger">*</span></label>
+                        <textarea id="id_subject" name="subject" rows="10" cols="125"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                    <button type="submit" class="admin-btn" style="float: right;">Send Email</button>
+                        </td>
+                    </tr>
+                </form> 
+            </thead>
+            </table>
+</div>
+</div>
+
+{% endblock %}

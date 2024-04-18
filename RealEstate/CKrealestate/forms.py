@@ -1,5 +1,5 @@
 from django import forms
-from .models import Property
+from .models import Property, Contact
 
 
 class PropertyForm(forms.ModelForm):
@@ -12,8 +12,8 @@ class PropertyForm(forms.ModelForm):
                   'property_photo1', 'property_photo2', 'property_photo3', 'property_photo4',
                   ]
         labels = {
-            'property_title': 'Property Title (100 characters)',
-            'property_description': 'Description',
+            'property_title': 'Property Title (max 100 characters)',
+            'property_description': 'Description (max 800 characters)',
             'property_price': 'Price',
             'property_id': 'ID',
             'home_type': 'Home Type',
@@ -35,6 +35,36 @@ class PropertyForm(forms.ModelForm):
             'property_photo4': 'Photo 4'
         }
         widgets = {
-            'property_description': forms.Textarea(attrs={'rows': 5, 'cols': 150}),
-            'property_title': forms.TextInput(attrs={'style': 'width: 700px;'}),  # Adjust width as neede
+            'property_description': forms.Textarea(attrs={'rows': 5, 'cols': 140}),
+            'property_title': forms.TextInput(attrs={'style': 'width: 700px;'}), # Adjust width as needed
         }
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['contact_first_name', 'contact_last_name', 'contact_phone', 'contact_email',
+                  'contact_office_street_address', 'contact_office_city', 'contact_office_state',
+                  'contact_office_zip_code', 'contact_website_link', 'contact_profile_description',
+                  'contact_profile_image',
+                  ]
+
+        labels = {'contact_first_name': 'First Name',
+                  'contact_last_name': 'Last Name',
+                  'contact_phone': 'Phone',
+                  'contact_email': 'Email',
+                  'contact_office_street_address': 'Office Street Address',
+                  'contact_office_city': 'Office City',
+                  'contact_office_state': 'Office State',
+                  'contact_office_zip_code': 'Office Zip Code',
+                  'contact_website_link': 'Office Website Link',
+                  'contact_profile_description': 'Profile Bio',
+                  'contact_profile_image': 'Profile Image'
+                  }
+
+        widgets = {
+            'contact_profile_description': forms.Textarea(attrs={'rows': 5, 'cols': 140}),
+            'contact_website_link': forms.TextInput(attrs={'style': 'width: 700px;'}),  # Adjust width as needed
+        }
+
+

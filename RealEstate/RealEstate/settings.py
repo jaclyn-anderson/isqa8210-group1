@@ -132,3 +132,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'siteadminlanding'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'janderson052024@gmail.com'
+EMAIL_HOST_PASSWORD = 'isqa8210-team1'
+DEFAULT_FROM_EMAIL = 'CK Real Estate Admin <ckrealestate@gmail.com>'

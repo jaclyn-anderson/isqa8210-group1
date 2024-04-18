@@ -33,7 +33,7 @@
         <td>{{ item.neighborhood }} </td>
          <td>{{ item.home_type }} </td>
           <td>{{ item.status }} </td>
-          <td><button style="background-color: blue; color: white;">See Details</button></td>
+          <td><a href="{% url 'property_details' item.property_id %}" class="btn" style="background-color: blue; color: white;">See Details</a></td>
         </tr>
          {% endfor %}
      {% else %}
