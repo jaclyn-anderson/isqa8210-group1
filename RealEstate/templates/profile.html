@@ -9,12 +9,12 @@
      <div class="col-sm-4">
          {% if contact.count > 0 %}
             {% for item in contact %}
-         <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Realtor: {{ item.contact_first_name  }} {{ item.contact_last_name  }} &nbsp;</span></h2>
-         <img style="padding-top: 20px" src="{{ item.contact_profile_image.url }}" class="profile-pic" /> 
-              <div style="padding-top: 20px"><a style="font-size: larger; width: fit-content;" href="{% url 'contact_realtor' %}" class="btn admin-btn" >
+         <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px; ">Realtor: {{ item.contact_first_name  }} {{ item.contact_last_name  }}</span></h2>
+         <img style="padding-top: 20px;" src="{{ item.contact_profile_image.url }}" class="profile-pic" /> 
+              <div style="padding-top: 20px"><a style="font-size: 20px; padding: 10px; width: 66%;" href="{% url 'contact_realtor' %}" class="btn admin-btn" >
                Click to Contact Realtor</a></div>
      </div>
-        <div class="col-sm-8" style="align-content: center; padding-top: 130px; box-shadow: gray">
+        <div class="col-sm-8" style="align-content: center; padding-top: 110px; box-shadow: gray">
             
             <p style="word-wrap: break-word; font-size: 20px;">{{ item.contact_profile_description }}</p>
             <br>
