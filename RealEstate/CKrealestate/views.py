@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Property, Contact, Property_Status
+from .models import Property, Contact, Property_Status, Property_Price_Range, Property_Neighborhood, Property_Type, \
+    Search_Log
 from django.contrib.auth.decorators import login_required
 from .forms import PropertyForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -107,4 +108,55 @@ def add_property(request):
     })
 
 
+def search_all_listings(request):
+    global selected_price_range, selected_neighborhood, selected_home_type
+    selected_home_type = None
+    selected_neighborhood = None
+    selected_price_range = None
+    property_price_range = Property_Price_Range.objects.all().order_by('price_range_id')
+    property_neighborhood = Property_Neighborhood.objects.all().order_by('neighborhood_name')
+    property_home_type = Property_Type.objects.all().order_by('property_type_name')
+    propertySearch = Property.objects.filter(property_active=True).all().order_by('property_id')
 
+    if request.method == 'POST':
+        allowed_filters = ['price_range_id', 'neighborhood_id', 'home_type_id']
+        if request.POST.get('home_type_id'):
+            selected_home_type = Property_Type.objects.filter(property_type_id=request.POST.get('home_type_id')).get()
+        else:
+            selected_home_type = None
+        if request.POST.get('neighborhood_id'):
+            selected_neighborhood = Property_Neighborhood.objects.filter(neighborhood_id=request.POST.get('neighborhood_id')).get()
+        else:
+            selected_neighborhood = None
+        if request.POST.get('price_range_id'):
+            selected_price_range = Property_Price_Range.objects.filter(price_range_id=request.POST.get('price_range_id')).get()
+        else:
+            selected_price_range = None
+        search_log = Search_Log(search_home_type=selected_home_type,
+                                search_neighborhood=selected_neighborhood,
+                                search_price_range=selected_price_range)
+        search_log.save()
+        for f in allowed_filters:
+            if request.POST.get(f):
+                propertySearch = propertySearch.filter(**{f: request.POST.get(f)})
+
+    active_count = propertySearch.filter(property_active=True).count()
+    paginator = Paginator(propertySearch, 5)  # 1 items per page
+    page = request.GET.get('page')
+    try:
+        property = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        property = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        property = paginator.page(paginator.num_pages)
+
+    return render(request, 'search-all-listings.html', {'property': property, 'active_count': active_count,
+                                                        'property_price_range': property_price_range,
+                                                        'property_neighborhood': property_neighborhood,
+                                                        'property_home_type': property_home_type,
+                                                        'selected_price_range': selected_price_range,
+                                                        'selected_neighborhood': selected_neighborhood,
+                                                        'selected_home_type': selected_home_type
+                                                        })

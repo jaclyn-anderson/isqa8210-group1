@@ -93,12 +93,12 @@ class Contact(models.Model):
 class Search_Log(models.Model):
     search_log_id = models.AutoField(primary_key=True, unique=True)
     search_date = models.DateField(auto_now_add=True)
-    search_home_type = models.ForeignKey(Property_Type, on_delete=models.CASCADE)
-    search_neighborhood = models.ForeignKey(Property_Neighborhood, on_delete=models.CASCADE)
-    search_price_range = models.ForeignKey(Property_Price_Range, on_delete=models.CASCADE)
+    search_home_type = models.ForeignKey(Property_Type, on_delete=models.CASCADE, null=True,blank=True)
+    search_neighborhood = models.ForeignKey(Property_Neighborhood, on_delete=models.CASCADE, null=True,blank=True)
+    search_price_range = models.ForeignKey(Property_Price_Range, on_delete=models.CASCADE, null=True,blank=True)
 
-
-
+    def __int__(self):
+        return self.search_log_id
 
 
 

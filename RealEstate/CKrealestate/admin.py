@@ -1,4 +1,5 @@
-from .models import Property_Status, Property_Type, Property_Neighborhood, Property_Price_Range, Property, Contact
+from .models import Property_Status, Property_Type, Property_Neighborhood, Property_Price_Range, Property, Contact, \
+    Search_Log
 from django.contrib import admin
 
 
@@ -44,4 +45,6 @@ class ContactAdmin(admin.ModelAdmin):
                     'contact_website_link', 'contact_profile_description', 'contact_profile_image', )
 
 
-
+@admin.register(Search_Log)
+class Search_LogAdmin(admin.ModelAdmin):
+    list_display = ('search_log_id', 'search_date', 'search_home_type', 'search_neighborhood', 'search_price_range')
