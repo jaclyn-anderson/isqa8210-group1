@@ -123,9 +123,10 @@ def add_property(request):
 @login_required
 def update_profile(request):
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, request.FILES)
 
         if form.is_valid():
+            form.save()
             return redirect('siteadminlanding')
     else:
         form = ProfileForm()

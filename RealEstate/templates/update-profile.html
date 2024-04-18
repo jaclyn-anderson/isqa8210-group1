@@ -12,7 +12,7 @@
     <div class="row" style="overflow-x:auto;">
      
      <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px; width: 75%;">
-         <p style="font-size: large"><b>To add a new property listing,</b> please complete all required fields 
+         <p style="font-size: large"><b>To add or edit your profile,</b> please fill in or edit all required fields 
              and then click the button labeled <b>'Submit'</b> (fields that have a  <span class="text-danger" style="font-size: larger">*</span> 
              are <b>Required</b>).
                 </p>
@@ -20,21 +20,69 @@
             <thead>
                 <tr>
                     <th colspan="11" style="text-align: center; background-color: blue; color: white; font-size: 18pt;">
-                        Add New Property
+                        Add/Update Profile
                     </th>
                 </tr>
             <tr>
-                
                 <td>
                  <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                 {{form.as_p}}
-         
+                 <div class="form-group">
+                    <label for="id_first_name">{{ form.fields.contact_first_name.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ form.contact_first_name}}
+                      <label for="id_first_name">{{ form.fields.contact_last_name.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ form.contact_last_name}}
+                     <label for="id_phone">{{ form.fields.contact_phone.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ form.contact_phone}}
+                     <label for="id_email">{{ form.fields.contact_email.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ form.contact_email}}
+                 </div>
+                </td> 
+            </tr>
+            <tr>
+                <td>        
+                 <div class="form-group">
+                    <label for="id_address">{{ form.fields.contact_office_street_address.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ form.contact_office_street_address}}
+                      <label for="id_city">{{ form.fields.contact_office_city.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ form.contact_office_city}}
+                     <label for="id_state">{{ form.fields.contact_office_state.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ form.contact_office_state}}
+                     <label for="id_zip">{{ form.fields.contact_office_zip_code.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ form.contact_office_zip_code}}
+                </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                    <label for="id_weblink">{{ form.fields.contact_website_link.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ form.contact_website_link}}
+                    </div>    
+                </td>
+            </tr>    
+             <tr>
+                <td>
+                    <div class="form-group">
+                    <label for="id_bio">{{ form.fields.contact_profile_description.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    <br>{{ form.contact_profile_description}}
+                    </div>    
+                </td>
+            </tr>  
+            <tr>
+                <td>
+                    <div class="form-group">
+                    <label for="id_image">{{ form.fields.contact_profile_image.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    <br>{{ form.contact_profile_image}}
+                    </div>    
+                </td>
+            </tr> 
+            <tr>  
+                <td>
                 <button type="submit" style="font-size: larger; float: right" href="" class="admin-btn" >
                Submit</button>
+               
                 </form>
-  
-           
                 </td>
             </tr>
             </thead>
