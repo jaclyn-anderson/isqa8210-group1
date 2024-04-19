@@ -12,11 +12,11 @@
             <h2> <span class="label label-default" style="font-weight: normal; font-size: 20px; background-color: #0073e5; padding: 15px;">Featured Property: Your Dream Home Awaits!</span></h2>
         {% for item in featured %}
             <img src="{{ item.property_photo1.url }}" class="home-pic" alt="image"/>
-           <div style="padding-top: 20px;"><a style="font-size: larger; width: 75%;" href="{% url 'property_details' item.property_id %}" class="btn admin-btn" >
+           <div style="padding-top: 20px;"><a style="font-size: larger; width: fit-content;" href="{% url 'property_details' item.property_id %}" class="btn admin-btn" >
                Click to View Details</a>
            </div>
         </div>
-         <div class="col-sm-12 col-md-12 col-lg-7"> 
+         <div class="col-sm-12 col-md-12 col-lg-7">
              <div  style="margin-top: 80px; background-color: #eeeeee; padding: 1px; border-radius: 10px; width: 70%;">
                  <h2> <span style="font-weight: bold; font-size: 40px; ">${{ item.property_price|intcomma }}</span>
                      <br>

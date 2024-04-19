@@ -4,9 +4,9 @@
 
 {% block content %}
 
-    <div class="container" style="margin-top: 20px;">
+    <div class="container-fluid" style="margin-top: 20px;">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-lg-4">
                 {% if property_details.count > 0 %}
                     {% for item in property_details %}
                         <div class="text-center" style="margin-bottom:5%; margin-left: 10px;">
@@ -33,33 +33,33 @@
             </div>
         </div>  
                       
-         <div class="row" style="margin-top: 50px">
-                            <div class="flex-container mb-3" style="display:flex;">
-                                <p style="background-color: #F0F0F0; padding: 5px; margin-right: 1px; border: 1px solid blue; align-content: center">{{ item.neighborhood }}</p>
-                                <p style="background-color: #F0F0F0; padding: 5px; border: 1px solid blue; align-content: center">{{ item.home_type }}</p>
-                                <p style="background-color: #F0F0F0; padding: 5px; border: 1px solid blue; align-content: center">Area: {{ item.property_area }}</p>
-                                <p style="background-color: #F0F0F0; padding: 5px; border: 1px solid blue; align-content: center">Bedrooms: {{ item.property_bedroom_count }}</p>
-                                <p style="background-color: #F0F0F0; padding: 5px; border: 1px solid blue; align-content: center">Bathrooms: {{ item.property_bathroom_count }}</p>
-                                <p style="background-color: #F0F0F0; padding: 5px; border: 1px solid blue; align-content: center">Year Built: {{ item.property_year_built }}</p>
+         <div class="col-lg-12" style="margin-top: 50px; padding-left: 120px; margin-bottom: 20px; overflow-x: auto">
+                            <div class="align-center" style="display:flex;">
+                                <p style="background-color: #F0F0F0; padding: 10px; width: 200px; border: 1px solid blue; text-align: center;">Year Built: {{ item.property_year_built }}</p>
+                                <p style="background-color: #F0F0F0; padding: 10px; width: 200px; border: 1px solid blue; text-align: center">Area Sq. Ft.: {{ item.property_area }}</p>
+                                <p style="background-color: #F0F0F0; padding: 10px; width: 200px; border: 1px solid blue; text-align: center">Bedrooms: {{ item.property_bedroom_count }}</p>
+                                <p style="background-color: #F0F0F0; padding: 10px; width: 200px; border: 1px solid blue; text-align: center">Bathrooms: {{ item.property_bathroom_count }}</p>
+                                <p style="background-color: #F0F0F0; padding: 10px; width: 200px; border: 1px solid blue; text-align: center">{{ item.neighborhood }}</p>
+                                <p style="background-color: #F0F0F0; padding: 10px; width: 200px; border: 1px solid blue; text-align: center">{{ item.home_type }}</p>
                             </div>
          </div>
         <div class="row" style="margin-top:10px;">
 
                                 <div class="col-md-4">
                                     {%  if item.property_photo2  %}
-                                    <img src="{{ item.property_photo2.url }}" class="img-fluid" style="width:100%; height: auto;" alt="Property Photo 2">
+                                    <img src="{{ item.property_photo2.url }}" class="img-fluid" style="width:450px; height: 350px;" alt="Property Photo 2">
                                     {% endif %}
                                     </div>
 
                                  <div class="col-md-4">
                                      {%  if item.property_photo3  %}
-                                     <img src="{{ item.property_photo3.url }}" class="img-fluid" style="width:100%; height: auto;" alt="Property Photo 3">
+                                     <img src="{{ item.property_photo3.url }}" class="img-fluid" style="width: 450px; height: 350px;" alt="Property Photo 3">
                                      {% endif %}
                                  </div>
 
                                 <div class="col-md-4">
                                     {%  if item.property_photo4  %}
-                                    <img src="{{ item.property_photo4.url }}" class="img-fluid" style="width:100%; height: auto;" alt="Property Photo 4">
+                                    <img src="{{ item.property_photo4.url }}" class="img-fluid" style="width:450px; height: 350px;" alt="Property Photo 4">
                                     {% endif %}
                                 </div>
         </div>
@@ -67,12 +67,5 @@
 
                     {% endfor %}
                 {% endif %}
-                <div class="row">
-                    <div class="col-12">
-                        <a class="btn" href="{% url 'all_listings' %}">Back to Property List</a>
-                    </div>
-                </div>
-            </div>
-
 
 {% endblock %}
