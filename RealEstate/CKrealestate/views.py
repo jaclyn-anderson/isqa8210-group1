@@ -6,6 +6,7 @@ from .forms import PropertyForm, ProfileForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect
 
 
 def home(request):
@@ -160,7 +161,7 @@ def property_details(request, property_id):
 
 def share_property(request, pk):
     # Retrieve property post by id
-    property = get_object_or_404(Post, pk=pk, status='published')
+    property = get_object_or_404(request.POST, property_id=pk, status='published')
     sent = False
     if request.method == 'POST':
         # Form was submitted
