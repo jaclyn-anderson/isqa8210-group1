@@ -1,19 +1,83 @@
-<!-- share-property.html -->
-
 {% extends 'base.html' %}
-{% block title %}Request Information{% endblock %}
+
+{% block title %}
+    Request Information
+{% endblock %}
+
 {% block content %}
-  {% if sent %}
-    <h1>Request information email successfully sent</h1>
-    <p>
-      "{{ property.title }}" was successfully sent to Carlos Kosalas.
-    </p>
-  {% else %}
-    <h1>Share "{{ property.title }}" by e-mail</h1>
-    <form method="post">
-      {{ form.as_p }}
-      {% csrf_token %}
-      <input type="submit" value="Send e-mail">
-    </form>
-  {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 col-md-10 col-lg-12" style="padding-top: 40px;">
+
+            {% if error_message %}
+                <p class="text-danger"><b>{{ error_message }}</b></p>
+            {% endif %}
+
+            <form method="post" action="{% url 'share_property' property_id=item.property_id %}">
+                {% csrf_token %}
+                <table class="table" style="border: 5px solid #0073e5; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th colspan="11" style="text-align: center; background-color: #0073e5; color: white; font-size: 18pt;">
+                                Contact Realtor About {{ item.property_title }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p style="font-size: 15px; text-align:center; padding-left: 10px;">Please complete all required fields below</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="name">Name <span class="text-danger">*</span></label>
+                                <input type="text" style="width: 300px;" id="name" name="name" value="{{ name }}" required>
+                            </td>
+                            <td>
+                                <label for="id_phone">Phone <span class="text-danger">*</span></label>
+                                <input type="tel" id="id_phone" name="phone" value="{{ phone }}">
+                            </td>
+                            <td colspan="2">
+                                <label for="id_email">Email <span class="text-danger">*</span></label>
+                                <input type="email" id="id_email" name="email" value="{{ email }}" style="width: 400px;" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <label for="property_link">Property Link</label>
+                                <input type="text" id="property_link" name="property_link" style="width: 400px;" readonly disabled>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <label for="message">Message <span class="text-danger">*</span></label><br>
+                                <textarea id="message" name="message" rows="8" cols="115" required></textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <input type="hidden" id="property_id" name="property_id" value="{{ item.property_id }}">
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                <button type="submit" class="admin-btn" style="float: right; background-color: #0073e5; color: white;">Send Email</button>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function generatePropertyLink() {
+        const propertyId = document.getElementById('property_id').value.trim();
+        const baseUrl = '{{ base_url }}';
+        document.getElementById('property_link').value = `${baseUrl}share_property/${propertyId}`;
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        generatePropertyLink();
+    });
+</script>
 {% endblock %}

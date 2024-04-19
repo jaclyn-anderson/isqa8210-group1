@@ -36,7 +36,7 @@ class PropertyForm(forms.ModelForm):
         }
         widgets = {
             'property_description': forms.Textarea(attrs={'rows': 5, 'cols': 140}),
-            'property_title': forms.TextInput(attrs={'style': 'width: 700px;'}), # Adjust width as needed
+            'property_title': forms.TextInput(attrs={'style': 'width: 700px;'}),  # Adjust width as needed
         }
 
 
@@ -68,3 +68,8 @@ class ProfileForm(forms.ModelForm):
         }
 
 
+class ContactForm(forms.Form):
+    name = forms.CharField(label='Name', max_length=100)
+    email = forms.EmailField(label='Your Email')
+    message = forms.CharField(label='Message', widget=forms.Textarea)
+    property_id = forms.IntegerField(widget=forms.HiddenInput())

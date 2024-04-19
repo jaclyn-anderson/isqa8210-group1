@@ -1,18 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Property, Contact, Property_Status, Property_Price_Range, Property_Neighborhood, Property_Type, \
     Search_Log
 from django.contrib.auth.decorators import login_required
-from .forms import PropertyForm, ProfileForm
+from .forms import PropertyForm, ProfileForm, ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect
 
 
 def home(request):
     featured = Property.objects.filter(property_featured=True, property_active=True)
 
     return render(request, 'home.html', {'featured': featured})
+
 
 def featured(request, pk):
     featured = Property.objects.filter(property_featured=True, property_active=True)
@@ -166,32 +166,26 @@ def property_details(request, property_id):
     return render(request, 'property-details.html', {'property_details': property_details})
 
 
-def share_property(request, pk):
-    # Retrieve property post by id
-    property = get_object_or_404(request.POST, property_id=pk, status='published')
-    sent = False
+def share_property(request, property_id):
+    property = get_object_or_404(Property, property_id=property_id)
+    base_url = request.build_absolute_uri('/')
     if request.method == 'POST':
-        # Form was submitted
-        form = EmailPostForm(request.POST)
+        form = ContactForm(request.POST)
         if form.is_valid():
-            # Form fields passed validation
             cd = form.cleaned_data
-            property_url = request.build_absolute_uri(
-                property.get_absolute_url())
-            subject = f"{cd['name']} requests more information on " \
-                      f"{property.title}"
-            message = f"Read {property.title} at {property_url}\n\n" \
-                      f"{cd['name']}\'s comments: {cd['comments']}"
-            send_mail(subject, message, {cd['email_from']},
-                      [cd['email_to']])
-            sent = True
+            # Retrieve property details
+            property_title = property.property_title
+            # Compose email message
+            subject = f"{cd['name']} requests more information on {property_title}"
+            message = f"Hi,\n\n{cd['name']} has requested more information about {property_title}.\n\n" \
+                      f"Message: {cd['message']}\n\nContact them at: {cd['email']}"
+            send_mail(subject, message, 'your_email@example.com', ['realtor_email@example.com'])
+            return render(request, 'contact_success.html', {'property_title': property_title})
     else:
-        form = EmailPostForm()
-    return render(request, 'share-property.html', {'property': property,
-                                                    'form': form,
-                                                    'sent': sent})
+        form = ContactForm()
 
-
+    return render(request, 'share-property.html',
+                  dict(base_url=base_url, property_id=property_id, item=property, form=form))
 
 
 
