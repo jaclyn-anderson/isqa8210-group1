@@ -141,15 +141,21 @@ def contact_realtor(request):
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
         phone = request.POST.get('phone', '')
-        subject = request.POST.get('subject', '')
+        body = request.POST.get('body', '')
 
         # Perform basic validation
-        if not (name and email and subject):
-            return render(request, 'contact-realtor.html', {'error_message': 'Please fill in all required fields.'})
+        if not (name and email and body and phone):
+            return render(request, 'contact-realtor.html', {
+                'error_message': 'Please fill in all required fields.',
+                'name': name,
+                'email': email,
+                'phone': phone,
+                'body': body
+            })
 
-        message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\n{subject}'
+        message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\n{body}'
         recipient_email = 'janderson052024@gmail.com'
-        send_mail('Contact Form Submission', message, email, [recipient_email])
+        send_mail('CK Real Estate Contact Form Submission', message, email, [recipient_email])
         return render(request, 'profile.html', {'success_message': 'Your email was sent successfully!'})
     else:
         return render(request, 'contact-realtor.html')

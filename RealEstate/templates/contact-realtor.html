@@ -4,12 +4,13 @@
 {% block title %}Contact Realtor - CK Real Estate{% endblock %}
 
 {% block content %}
-<div class="container" style="margin-top: 20px">
-<div class="col-sm-10">
-    <p style="font-size: large"><b>To send an email to the Realtor,</b> please complete all required fields 
-             and then click the button labeled <b>'Send Email'</b> (fields that have a  <span class="text-danger" style="font-size: larger">*</span> 
-             are <b>Required</b>).
-                </p>
+
+<div class="container">
+ <div class="row">
+    <div class="col-sm-10 col-md-10 col-lg-12" style="padding-top: 40px; overflow-x: auto">
+      {% if error_message %}
+          <p class="text-danger"><b>{{ error_message }}</b></p>
+    {% endif %}
         <table class="table" style="border: 5px solid blue;">
              <form method="post" action="{% url 'contact_realtor' %}">
                     {% csrf_token %}
@@ -20,24 +21,32 @@
                     </th>
                 </tr>
                 <tr>
+                    <td colspan="3">
+                        <p style="font-size: 15px; padding-left: 10px;">  <b>To send an email to the Realtor,
+                        </b> please complete all required fields below and then click the <b>'Send Email'</b> button
+                         (fields that have a <span class="text-danger" style="font-size: larger">*</span> are <b>Required</b>).
+                </p>
+                    </td>
+                </tr>
+                <tr>
               
                         <td>        
                         <label for="id_name">Name <span class="text-danger">*</span></label>
-                        <input type="text" style="width: 400px" id="id_name" name="name">
+                        <input type="text" maxlength="50" style="width: 300px" id="id_name" name="name" value="{{ name }}">
                         </td>
                         <td>
                         <label for="id_phone">Phone <span class="text-danger">*</span></label>
-                        <input type="tel" id="id_phone" name="phone">
+                        <input type="tel" id="id_phone" name="phone" value="{{ phone }}">
                         </td>
                         <td>
                         <label for="id_email">Email <span class="text-danger">*</span></label>
-                        <input type="email" style="width: 500px" id="id_email" name="email">
+                        <input type="email" style="width: 400px" id="id_email" name="email" value="{{ email }}">
                         </td>
                  </tr> 
                     <tr>
                         <td colspan="3">   
-                        <label for="id_subject">Comments/Questions <span class="text-danger">*</span></label>
-                        <textarea id="id_subject" name="subject" rows="10" cols="125"></textarea>
+                        <label for="id_body">Comments/Questions <span class="text-danger">*</span></label>
+                        <textarea id="id_body" name="body" rows="8" cols="115">{{ body }}</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -48,7 +57,7 @@
                 </form> 
             </thead>
             </table>
+        </div>
+    </div>
 </div>
-</div>
-
 {% endblock %}
