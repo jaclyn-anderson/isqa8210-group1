@@ -250,8 +250,13 @@ def siteadminreports(request):
     property_price_range = Property_Price_Range.objects.all()
     property_neighborhood = Property_Neighborhood.objects.all()
     property_home_type = Property_Type.objects.all()
+    property = Property.objects.all()
+
     return render(request, 'siteadminreports.html', {
-                                                     'property_price_range': property_price_range,
-                                                     'property_neighborhood': property_neighborhood,
-                                                     'property_home_type': property_home_type,
-                                                     })
+        'property': property,
+        'property_price_range': property_price_range,
+        'property_neighborhood': property_neighborhood,
+        'property_home_type': property_home_type,
+    })
+
+
