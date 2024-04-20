@@ -37,13 +37,4 @@
     {% endif %}
         </div>
     </div>
-    <script>
-        window.onload = function() {
-            // Display popup message if it exists
-            var successMessage = "{{ success_message }}";
-            if (successMessage && successMessage !== "None") {
-                alert(successMessage);
-            }
-        };
-    </script>
 {% endblock %}

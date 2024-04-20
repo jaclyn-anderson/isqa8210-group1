@@ -72,4 +72,5 @@ class ContactForm(forms.Form):
     name = forms.CharField(label='Name', max_length=100)
     email = forms.EmailField(label='Your Email')
     message = forms.CharField(label='Message', widget=forms.Textarea)
+    phone = forms.CharField(label='Phone')
     property_id = forms.IntegerField(widget=forms.HiddenInput())
