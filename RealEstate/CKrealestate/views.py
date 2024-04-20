@@ -50,7 +50,8 @@ def profile(request):
     return render(request, 'profile.html', {"contact": contact,
                                             "success_message": success_message})
 
-  #  return render(request, 'profile.html', {"contact": contact})
+
+#  return render(request, 'profile.html', {"contact": contact})
 
 
 def omahalinks(request):
@@ -92,7 +93,6 @@ def siteadminlanding(request):
         obj.save()
 
         return redirect(request.META.get('HTTP_REFERER', '/'))
-
 
     try:
         property = paginator.page(page)
@@ -161,6 +161,7 @@ def contact_realtor(request):
     else:
         return render(request, 'contact-realtor.html')
 
+
 def property_details(request, property_id):
     property_details = Property.objects.filter(property_id=property_id)
     return render(request, 'property-details.html', {'property_details': property_details})
@@ -188,7 +189,6 @@ def share_property(request, property_id):
                   dict(base_url=base_url, property_id=property_id, item=property, form=form))
 
 
-
 def search_all_listings(request):
     global selected_price_range, selected_neighborhood, selected_home_type
     selected_home_type = None
@@ -206,11 +206,13 @@ def search_all_listings(request):
         else:
             selected_home_type = None
         if request.POST.get('neighborhood_id'):
-            selected_neighborhood = Property_Neighborhood.objects.filter(neighborhood_id=request.POST.get('neighborhood_id')).get()
+            selected_neighborhood = Property_Neighborhood.objects.filter(
+                neighborhood_id=request.POST.get('neighborhood_id')).get()
         else:
             selected_neighborhood = None
         if request.POST.get('price_range_id'):
-            selected_price_range = Property_Price_Range.objects.filter(price_range_id=request.POST.get('price_range_id')).get()
+            selected_price_range = Property_Price_Range.objects.filter(
+                price_range_id=request.POST.get('price_range_id')).get()
         else:
             selected_price_range = None
         search_log = Search_Log(search_home_type=selected_home_type,
@@ -241,3 +243,15 @@ def search_all_listings(request):
                                                         'selected_neighborhood': selected_neighborhood,
                                                         'selected_home_type': selected_home_type
                                                         })
+
+
+@login_required()
+def siteadminreports(request):
+    property_price_range = Property_Price_Range.objects.all()
+    property_neighborhood = Property_Neighborhood.objects.all()
+    property_home_type = Property_Type.objects.all()
+    return render(request, 'siteadminreports.html', {
+                                                     'property_price_range': property_price_range,
+                                                     'property_neighborhood': property_neighborhood,
+                                                     'property_home_type': property_home_type,
+                                                     })

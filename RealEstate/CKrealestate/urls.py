@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (home, profile, siteadminlanding, omahalinks, all_listings, add_property, property_details,
-                    share_property, update_profile, contact_realtor,  search_all_listings)
+                    share_property, update_profile, contact_realtor,  search_all_listings, siteadminreports)
 
 urlpatterns = [
     path('', home, name='home'),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('property-details/<int:property_id>/', property_details, name='property_details'),
     path('share_property/<int:property_id>/', share_property, name='share_property'),
     path('search_all_listings', search_all_listings, name='search_all_listings'),
+    path('siteadminreports', siteadminreports, name='siteadminreports'),
 ]
