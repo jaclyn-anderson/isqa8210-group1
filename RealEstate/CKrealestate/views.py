@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import PropertyForm, ProfileForm, ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
-from urllib.parse import urlencode
-from django.urls import reverse
+from datetime import datetime, timedelta
+from django.db.models import Count
 
 
 def home(request):
@@ -240,3 +240,44 @@ def search_all_listings(request):
                                                         'selected_neighborhood': selected_neighborhood,
                                                         'selected_home_type': selected_home_type
                                                         })
+
+@login_required()
+def siteadminreports(request):
+    property_price_range = Property_Price_Range.objects.all()
+    property_neighborhood = Property_Neighborhood.objects.all()
+    property_home_type = Property_Type.objects.all()
+    property = Property.objects.all()
+    selected_month_year = request.GET.get('selected_month_year')
+    start_date = None
+    end_date = None
+
+    if selected_month_year:
+        selected_date = datetime.strptime(selected_month_year, '%Y-%m')
+        year = selected_date.year
+        month = selected_date.month
+        start_date = datetime(year, month, 1).date()
+        end_date = (datetime(year, month, 1) + timedelta(days=32)).date()
+
+    search_logs = Search_Log.objects.filter(search_date__gte=start_date, search_date__lt=end_date) if start_date and end_date else Search_Log.objects.all()
+
+    search_log_count = search_logs.count()
+
+    price_range_counts = search_logs.values('search_price_range__price_range_value').annotate(count=Count('search_price_range__price_range_value')).order_by('search_price_range')
+    home_type_counts = Search_Log.objects.values('search_home_type__property_type_name').annotate(count=Count('search_home_type__property_type_name')).order_by('search_home_type')
+    neighborhood_counts = Search_Log.objects.values('search_neighborhood__neighborhood_name').annotate(count=Count('search_neighborhood__neighborhood_name')).order_by('search_neighborhood')
+
+    return render(request, 'siteadminreports.html', {
+        'property': property,
+        'property_price_range': property_price_range,
+        'property_neighborhood': property_neighborhood,
+        'property_home_type': property_home_type,
+        'search_logs': search_logs,
+        'price_range_counts': price_range_counts,
+        'home_type_counts': home_type_counts,
+        'neighborhood_counts': neighborhood_counts,
+        'selected_month_year': selected_month_year,
+        'search_log_count': search_log_count,
+
+    })
+
+

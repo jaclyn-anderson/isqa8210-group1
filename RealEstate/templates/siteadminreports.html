@@ -1,0 +1,209 @@
+R{% extends 'base2.html' %}
+{% load humanize %}
+{% block content %}
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+    <hr>
+    <div class="row">
+        <p style="float: right; margin-right: 20px;"><a href="{% url 'siteadminlanding' %}" class="btn site-admin-btn">Back
+            to Main</a></p>
+    </div>
+
+    <div class="row" style="margin-top: 50px">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+            <p></p>
+        </div>
+    </div>
+    <style>
+        .table-striped tr:nth-child(odd) {
+            text-align: center;
+            background-color: white;
+        }
+
+        .table-striped tr:nth-child(even) {
+            text-align: center;
+            background-color: lightgray;
+        }
+
+        th {
+            text-align: center;
+            background-color: gray;
+        }
+    </style>
+    <div class="row" style="overflow-x: auto">
+        <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px; width: 75%;">
+            <table class="table" style="border: 5px solid blue;">
+                <thead>
+                <tr>
+                    <th colspan="11" style="text-align: center; background-color: blue; color: white; font-size: 18pt;">
+                        Reports
+                    </th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px; width: 75%;">
+                            <div style="display: inline-block; padding-bottom: 15px;">
+                                <form method="GET" action="{% url 'siteadminreports' %}">
+                                    <div class="form-row align-items-center">
+                                        <div class="col-auto">
+                                            <input type="month" class="form-control mb-2" id="selected_month_year"
+                                                   name="selected_month_year" value="{{ selected_month_year }}">
+                                        </div>
+
+                                    </div>
+                                    <button style="margin-left: 20px" type="submit" class="btn site-admin-btn">Run
+                                        Report
+                                    </button>
+                                </form>
+                            </div>
+
+
+                            <div>
+                                {% if property %}
+                                    <table class="table table-striped table-bordered" style="border: 2px solid blue;">
+                                        <thead>
+                                        <tr>
+                                            <th style=" border: 2px solid blue" scope="col">Search Property</th>
+                                            <th style=" border: 2px solid blue" scope="col">Item</th>
+                                            <th style=" border: 2px solid blue" scope="col">Total Count</th>
+                                            <th style=" border: 2px solid blue" scope="col">Totals</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="table-striped">
+
+                                        {% for item in price_range_counts %}
+                                            <tr>
+
+                                                <td style=" border: 2px solid blue">
+                                                    Price Range
+                                                </td>
+                                                <td style=" border: 2px solid blue">{{ item.search_price_range__price_range_value }}</td>
+
+                                                <td style=" border: 2px solid blue">{{ item.count }}</td>
+                                                <td style=" border: 2px solid blue"></td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td style="border: 2px solid blue">
+                                                Subtotal
+                                            </td>
+                                            <td></td>
+                                            <td style="border: 2px solid blue">
+
+                                            </td>
+                                            <td style="border: 2px solid blue"></td>
+                                        </tr>
+
+                                        {% for item in home_type_counts %}
+                                            <tr>
+
+                                                <td style=" border: 2px solid blue">
+                                                    Home Type
+                                                </td>
+                                                <td style=" border: 2px solid blue">{{ item.search_home_type__property_type_name }}</td>
+
+
+                                                <td style=" border: 2px solid blue">{{ item.count }}</td>
+                                                <td style=" border: 2px solid blue"></td>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td style="border: 2px solid blue">
+                                                Subtotal
+                                            </td>
+                                            <td></td>
+                                            <td style="border: 2px solid blue">
+
+                                            </td>
+                                            <td style="border: 2px solid blue"></td>
+                                        </tr>
+                                        {% for item in neighborhood_counts %}
+                                            <tr>
+
+                                                <td style=" border: 2px solid blue">
+                                                    Neighborhood
+                                                </td>
+                                                <td style=" border: 2px solid blue">{{ item.search_neighborhood__neighborhood_name }}</td>
+
+
+                                                <td style=" border: 2px solid blue">{{ item.count }}</td>
+                                                <td style=" border: 2px solid blue"></td>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td style="border: 2px solid blue">
+                                                Subtotal
+                                            </td>
+                                            <td style="border: 2px solid blue"></td>
+                                            <td style="border: 2px solid blue">
+
+                                            </td>
+                                            <td style="border: 2px solid blue"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 2px solid blue" >
+                                                Total
+                                            </td>
+                                            <td style="border: 2px solid blue"></td>
+                                            <td style="border: 2px solid blue"></td>
+                                            <td style="border: 2px solid blue">
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p>No Property Found</p>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+
+                </thead>
+            </table>
+
+        </div>
+    </div>
+    </thead>
+    </table>
+
+    </div>
+
+
+    </div>
+
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'mm/yy',  // Format for month and year
+                onClose: function (dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, month, 1));
+                }
+            });
+
+            // Handle click on calendar icon button
+            $("#datepicker-icon").click(function () {
+                $("#datepicker").datepicker("show");
+            });
+        });
+    </script>
+
+
+
+{% endblock content %}
