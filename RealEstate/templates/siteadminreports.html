@@ -51,13 +51,18 @@
                     <td>
                         <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px; width: 75%;">
                             <div style="display: inline-block; padding-bottom: 15px;">
-                                <input style="background-color: white; color: black" type="text" id="datepicker" class="btn site-admin-btn" placeholder="MM/YYYY">
-                                <label for="datepicker">
-                                    <i id="datepicker-icon" class="fa fa-calendar"
-                                       style="font-size: 25px; padding-top: 5px"></i>
-                                </label>
-                                <button style="margin-left: 20px" type="submit" class="btn site-admin-btn">Run Report</button>
+                                <form method="GET" action="{% url 'siteadminreports' %}">
+                                    <div class="form-row align-items-center">
+                                        <div class="col-auto">
+                                            <input type="month" class="form-control mb-2" id="selected_month_year"
+                                                   name="selected_month_year" value="{{ selected_month_year }}">
+                                        </div>
 
+                                    </div>
+                                    <button style="margin-left: 20px" type="submit" class="btn site-admin-btn">Run
+                                        Report
+                                    </button>
+                                </form>
                             </div>
 
 
@@ -73,17 +78,18 @@
                                         </tr>
                                         </thead>
                                         <tbody class="table-striped">
-                                        {% for item in property_price_range %}
+
+                                        {% for item in price_range_counts %}
                                             <tr>
 
                                                 <td style=" border: 2px solid blue">
                                                     Price Range
                                                 </td>
-                                                <td style=" border: 2px solid blue">{{ item.price_range_value }}</td>
+                                                <td style=" border: 2px solid blue">{{ item.search_price_range__price_range_value }}</td>
 
+                                                <td style=" border: 2px solid blue">{{ item.count }}</td>
+                                                <td style=" border: 2px solid blue"></td>
 
-                                                <td style=" border: 2px solid blue"></td>
-                                                <td style=" border: 2px solid blue"></td>
                                             </tr>
                                         {% endfor %}
                                         <tr>
@@ -91,19 +97,22 @@
                                                 Subtotal
                                             </td>
                                             <td></td>
-                                            <td style="border: 2px solid blue">{{ property_price_range.count }}</td>
+                                            <td style="border: 2px solid blue">
+
+                                            </td>
                                             <td style="border: 2px solid blue"></td>
                                         </tr>
-                                        {% for item in property_home_type %}
+
+                                        {% for item in home_type_counts %}
                                             <tr>
 
                                                 <td style=" border: 2px solid blue">
                                                     Home Type
                                                 </td>
-                                                <td style=" border: 2px solid blue">{{ item.property_type_name }}</td>
+                                                <td style=" border: 2px solid blue">{{ item.search_home_type__property_type_name }}</td>
 
 
-                                                <td style=" border: 2px solid blue"></td>
+                                                <td style=" border: 2px solid blue">{{ item.count }}</td>
                                                 <td style=" border: 2px solid blue"></td>
                                             </tr>
                                         {% endfor %}
@@ -112,19 +121,21 @@
                                                 Subtotal
                                             </td>
                                             <td></td>
-                                            <td style="border: 2px solid blue">{{ property_home_type.count }}</td>
+                                            <td style="border: 2px solid blue">
+
+                                            </td>
                                             <td style="border: 2px solid blue"></td>
                                         </tr>
-                                        {% for item in property_neighborhood %}
+                                        {% for item in neighborhood_counts %}
                                             <tr>
 
                                                 <td style=" border: 2px solid blue">
                                                     Neighborhood
                                                 </td>
-                                                <td style=" border: 2px solid blue">{{ item.neighborhood_name }}</td>
+                                                <td style=" border: 2px solid blue">{{ item.search_neighborhood__neighborhood_name }}</td>
 
 
-                                                <td style=" border: 2px solid blue"></td>
+                                                <td style=" border: 2px solid blue">{{ item.count }}</td>
                                                 <td style=" border: 2px solid blue"></td>
                                             </tr>
                                         {% endfor %}
@@ -133,19 +144,20 @@
                                                 Subtotal
                                             </td>
                                             <td style="border: 2px solid blue"></td>
-                                            <td style="border: 2px solid blue">{{ property_neighborhood.count }}</td>
+                                            <td style="border: 2px solid blue">
+
+                                            </td>
                                             <td style="border: 2px solid blue"></td>
                                         </tr>
                                         <tr>
-                                            <td style="border: 2px solid blue">
+                                            <td style="border: 2px solid blue" >
                                                 Total
                                             </td>
                                             <td style="border: 2px solid blue"></td>
                                             <td style="border: 2px solid blue"></td>
                                             <td style="border: 2px solid blue">
-                                                {% with total_count=property_price_range.count|add:property_home_type.count|add:property_neighborhood.count %}
-                                                    {{ total_count }}
-                                                {% endwith %}</td>
+
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -157,11 +169,20 @@
                         </div>
                     </td>
                 </tr>
+
                 </thead>
             </table>
 
         </div>
     </div>
+    </thead>
+    </table>
+
+    </div>
+
+
+    </div>
+
     <script>
         $(function () {
             $("#datepicker").datepicker({
@@ -182,6 +203,7 @@
             });
         });
     </script>
+
 
 
 {% endblock content %}
