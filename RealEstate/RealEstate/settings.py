@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'CKrealestate.apps.CkrealestateConfig',
     'django.contrib.humanize',
-    'crispy_forms',
 
 ]
 

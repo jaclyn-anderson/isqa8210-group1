@@ -54,7 +54,7 @@
                     <thead>
                     <tr>
                         <th colspan="10"
-                            style="text-align: center; background-color: blue; color: white; font-size: larger">Property
+                            style="text-align: center; background-color: blue; color: white; font-size: larger">All
                             Listings
                         </th>
                     </tr>
@@ -76,7 +76,9 @@
                             <td>{{ item.neighborhood }} </td>
                             <td>{{ item.home_type }} </td>
                             <td>{{ item.status }} </td>
-                          <td><a href="{% url 'property_details' item.property_id %}" class="btn" style="background-color: blue; color: white;">See Details</a></td>
+                            <td>
+                                <button style="background-color: blue; color: white;">See Details</button>
+                            </td>
                             </tr>
                         {% endfor %}
                 {% else %}

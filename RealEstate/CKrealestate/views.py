@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import PropertyForm, ProfileForm, ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect
+from urllib.parse import urlencode
+from django.urls import reverse
 
 
 def home(request):
@@ -37,20 +38,6 @@ def all_listings(request):
         property = paginator.page(paginator.num_pages)
 
     return render(request, 'all-listings.html', {'property': property, 'active_count': active_count})
-
-
-def profile(request):
-    contact = Contact.objects.all()
-    success_message = None
-    if request.GET.get('success_message') == 'true':
-        success_message = 'Your email was sent successfully!'
-        # Remove the 'success_message' query parameter from the URL
-        return HttpResponseRedirect(request.path)
-
-    return render(request, 'profile.html', {"contact": contact,
-                                            "success_message": success_message})
-
-  #  return render(request, 'profile.html', {"contact": contact})
 
 
 def omahalinks(request):
@@ -137,7 +124,14 @@ def update_profile(request):
     return render(request, 'update-profile.html', {'form': form})
 
 
+def profile(request):
+    contact = Contact.objects.all()
+
+    return render(request, 'profile.html', {"contact": contact})
+
+
 def contact_realtor(request):
+
     if request.method == 'POST':
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
@@ -155,11 +149,16 @@ def contact_realtor(request):
             })
 
         message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\n{body}'
-        recipient_email = 'janderson052024@gmail.com'
+        recipient_email = 'msmwillschoolacct@gmail.com'
         send_mail('CK Real Estate Contact Form Submission', message, email, [recipient_email])
-        return render(request, 'profile.html', {'success_message': 'Your email was sent successfully!'})
+        success_message = 'Your email has been sent successfully!'
+        return render(request, 'contact_success.html', {'success_message': success_message})
     else:
         return render(request, 'contact-realtor.html')
+
+def contact_success(request):
+    return render(request, 'contact_success.html')
+
 
 def property_details(request, property_id):
     property_details = Property.objects.filter(property_id=property_id)
@@ -176,10 +175,10 @@ def share_property(request, property_id):
             # Retrieve property details
             property_title = property.property_title
             # Compose email message
-            subject = f"{cd['name']} requests more information on {property_title}"
+            subject = f"{cd['name']}, requests more information on {property_title}"
             message = f"Hi,\n\n{cd['name']} has requested more information about {property_title}.\n\n" \
-                      f"Message: {cd['message']}\n\nContact them at: {cd['email']}"
-            send_mail(subject, message, 'your_email@example.com', ['realtor_email@example.com'])
+                      f"Message: {cd['message']}\n\nContact them at email: {cd['email']} or phone: {cd['phone']}."
+            send_mail(subject, message, 'your_email@example.com', ['msmwillschoolacct@gmail.com'])
             return render(request, 'contact_success.html', {'property_title': property_title})
     else:
         form = ContactForm()
