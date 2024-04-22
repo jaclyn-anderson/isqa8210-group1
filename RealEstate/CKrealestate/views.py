@@ -56,6 +56,14 @@ def omahalinks(request):
 def siteadminlanding(request):
     property1 = Property.objects.all().order_by('property_id')  # for all the records
     status = Property_Status.objects.all().order_by('property_status_name')
+    sort = request.GET.get('qSortBy')
+    sortDir = request.GET.get('qSortDir')
+    if sort is not None:
+        property1 = property1.order_by(sort)
+        if sortDir == 'desc':
+            property1 = property1.reverse()
+        else:
+            property1 = property1.all()
     paginator = Paginator(property1, 5)  # 1 items per page
 
     page = request.GET.get('page')
