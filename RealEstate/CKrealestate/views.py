@@ -221,6 +221,14 @@ def search_all_listings(request):
                 propertySearch = propertySearch.filter(**{f: request.POST.get(f)})
 
     active_count = propertySearch.filter(property_active=True).count()
+    sort = request.GET.get('qSortBy')
+    sortDir = request.GET.get('qSortDir')
+    if sort is not None:
+        propertySearch = propertySearch.order_by(sort)
+        if sortDir == 'desc':
+            propertySearch = propertySearch.reverse()
+        else:
+            propertySearch = propertySearch.all()
     paginator = Paginator(propertySearch, 5)  # 1 items per page
     page = request.GET.get('page')
     try:
