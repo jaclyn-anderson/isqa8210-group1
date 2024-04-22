@@ -6,7 +6,7 @@ from .forms import PropertyForm, ProfileForm, ContactForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
 from datetime import datetime, timedelta
-from django.db.models import Count
+from django.db.models import Count, Sum
 
 
 def home(request):
@@ -248,8 +248,8 @@ def siteadminreports(request):
     property_home_type = Property_Type.objects.all()
     property = Property.objects.all()
     selected_month_year = request.GET.get('selected_month_year')
-    start_date = None
-    end_date = None
+    search_log_count = 0
+
 
     if selected_month_year:
         selected_date = datetime.strptime(selected_month_year, '%Y-%m')
@@ -258,26 +258,47 @@ def siteadminreports(request):
         start_date = datetime(year, month, 1).date()
         end_date = (datetime(year, month, 1) + timedelta(days=32)).date()
 
-    search_logs = Search_Log.objects.filter(search_date__gte=start_date, search_date__lt=end_date) if start_date and end_date else Search_Log.objects.all()
+        search_logs = Search_Log.objects.filter(search_date__gte=start_date, search_date__lt=end_date)
 
-    search_log_count = search_logs.count()
+        search_log_count = search_logs.count()
 
-    price_range_counts = search_logs.values('search_price_range__price_range_value').annotate(count=Count('search_price_range__price_range_value')).order_by('search_price_range')
-    home_type_counts = Search_Log.objects.values('search_home_type__property_type_name').annotate(count=Count('search_home_type__property_type_name')).order_by('search_home_type')
-    neighborhood_counts = Search_Log.objects.values('search_neighborhood__neighborhood_name').annotate(count=Count('search_neighborhood__neighborhood_name')).order_by('search_neighborhood')
+        price_range_counts = search_logs.values('search_price_range__price_range_value').annotate(count=Count('search_price_range__price_range_value')).order_by('search_price_range')
+        home_type_counts = Search_Log.objects.values('search_home_type__property_type_name').annotate(count=Count('search_home_type__property_type_name')).order_by('search_home_type')
+        neighborhood_counts = Search_Log.objects.values('search_neighborhood__neighborhood_name').annotate(count=Count('search_neighborhood__neighborhood_name')).order_by('search_neighborhood')
 
-    return render(request, 'siteadminreports.html', {
-        'property': property,
-        'property_price_range': property_price_range,
-        'property_neighborhood': property_neighborhood,
-        'property_home_type': property_home_type,
-        'search_logs': search_logs,
-        'price_range_counts': price_range_counts,
-        'home_type_counts': home_type_counts,
-        'neighborhood_counts': neighborhood_counts,
-        'selected_month_year': selected_month_year,
-        'search_log_count': search_log_count,
+        # Only calculate counts if there are search logs
+    if search_log_count > 0:
+       price_range_counts = search_logs.values('search_price_range__price_range_value').annotate(
+       count=Count('search_price_range__price_range_value')).order_by('search_price_range')
+       home_type_counts = search_logs.values('search_home_type__property_type_name').annotate(
+       count=Count('search_home_type__property_type_name')).order_by('search_home_type')
+       neighborhood_counts = search_logs.values('search_neighborhood__neighborhood_name').annotate(
+       count=Count('search_neighborhood__neighborhood_name')).order_by('search_neighborhood')
+       # Calculate subtotal counts for each category
+       subtotal_price_range_count = price_range_counts.aggregate(subtotal=Sum('count'))[
+           'subtotal'] if search_log_count > 0 else 0
+       subtotal_home_type_count = home_type_counts.aggregate(subtotal=Sum('count'))[
+           'subtotal'] if search_log_count > 0 else 0
+       subtotal_neighborhood_count = neighborhood_counts.aggregate(subtotal=Sum('count'))[
+           'subtotal'] if search_log_count > 0 else 0
+       # Calculate overall total count
+       overall_total_count = subtotal_price_range_count + subtotal_home_type_count + subtotal_neighborhood_count
 
-    })
-
-
+       return render(request, 'siteadminreports.html', {
+            'property': property,
+            'property_price_range': property_price_range,
+            'property_neighborhood': property_neighborhood,
+            'property_home_type': property_home_type,
+            'search_logs': search_logs,
+            'price_range_counts': price_range_counts,
+            'home_type_counts': home_type_counts,
+            'neighborhood_counts': neighborhood_counts,
+            'selected_month_year': selected_month_year,
+            'search_log_count': search_log_count,
+            'subtotal_price_range_count': subtotal_price_range_count,
+            'subtotal_home_type_count': subtotal_home_type_count,
+            'subtotal_neighborhood_count': subtotal_neighborhood_count,
+            'overall_total_count': overall_total_count,
+        })
+    else:
+        return render(request, 'siteadminreports.html')
