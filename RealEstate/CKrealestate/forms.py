@@ -23,7 +23,7 @@ class PropertyForm(forms.ModelForm):
             'property_street_address': 'Street Address',
             'property_city': 'City',
             'property_state': 'State',
-            'property_zip_code': 'ZIP Code',
+            'property_zip_code': 'Zip Code',
             'property_area': 'Area Square Footage',
             'property_year_built': 'Year Built',
             'property_bedroom_count': 'Bedrooms',
@@ -36,7 +36,14 @@ class PropertyForm(forms.ModelForm):
         }
         widgets = {
             'property_description': forms.Textarea(attrs={'rows': 5, 'cols': 140}),
-            'property_title': forms.TextInput(attrs={'style': 'width: 700px;'}),  # Adjust width as needed
+            'property_street_address': forms.TextInput(attrs={'style': 'width: 300px;'}),
+            'property_state': forms.TextInput(attrs={'style': 'width: 30px;'}),
+            'property_zip_code': forms.TextInput(attrs={'style': 'width: 80px;'}),
+            'property_title': forms.TextInput(attrs={'style': 'width: 700px;'}),
+            'property_area': forms.NumberInput(attrs={'style': 'width: 100px;'}),
+            'property_year_built': forms.NumberInput(attrs={'style': 'width: 100px;'}),
+            'property_bedroom_count':  forms.NumberInput(attrs={'style': 'width: 50px;'}),
+            'property_bathroom_count': forms.NumberInput(attrs={'style': 'width: 50px;'}),
         }
 
 

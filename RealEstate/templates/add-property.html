@@ -9,7 +9,8 @@
     <p style="float: right; margin-right: 20px;"> <a href="{% url 'siteadminlanding' %}" class="btn site-admin-btn">Back to Main</a></p>
    </div>
 
-    <div class="row" style="overflow-x:auto;">
+     <div class="row" style="overflow-x:auto;">
+     
      <div class="col-sm-10" style="margin-left: 200px; margin-top: 30px; width: 75%;">
          <p style="font-size: large"><b>To add a new property listing,</b> please complete all required fields 
              and then click the button labeled <b>'Submit'</b> (fields that have a  <span class="text-danger" style="font-size: larger">*</span> 
@@ -66,6 +67,8 @@
                     {{ property_form.property_bedroom_count }}
                     <label for="id_property_bathroom_count">{{ property_form.property_bathroom_count.label }} <span class="text-danger" style="font-size: larger">*</span></label>
                     {{ property_form.property_bathroom_count }}
+                    &nbsp; <label for="id_property_active">{{ property_form.property_active.label }} <span class="text-danger" style="font-size: larger">*</span></label>
+                    {{ property_form.property_active }}
                 </div>
 
 
@@ -74,7 +77,7 @@
                     {{ property_form.property_description }}
                 </div>
                 <div>
-                    <p style="padding-top: 10px; text-align: center; border: 3px solid blue;"><b>Note:</b> The photo labeled <b>'Photo 1'</b> will be the main photo displayed for your property. 
+                    <p style="padding-top: 10px; text-align: center; border: 3px solid blue; width: 90%"><b>Note:</b> The photo labeled <b>'Photo 1'</b> will be the main photo displayed for your property. 
                     If your property is marked as featured, it will be the only photo displayed on the Home page.
                     </p>
                 </div>
