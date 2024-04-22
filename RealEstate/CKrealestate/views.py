@@ -24,6 +24,14 @@ def featured(request, pk):
 def all_listings(request):
     property1 = Property.objects.filter(property_active=True).all().order_by('property_id')
     active_count = Property.objects.filter(property_active=True).count()
+    sort = request.GET.get('qSortBy')
+    sortDir = request.GET.get('qSortDir')
+    if sort is not None:
+        property1 = property1.order_by(sort)
+        if sortDir == 'desc':
+            property1 = property1.reverse()
+        else:
+            property1 = property1.all()
     paginator = Paginator(property1, 5)  # 1 items per page
 
     page = request.GET.get('page')
