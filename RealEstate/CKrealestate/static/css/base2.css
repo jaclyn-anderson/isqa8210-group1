@@ -130,3 +130,8 @@ body {
     border-color: blue;
 }
 
+.table-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}

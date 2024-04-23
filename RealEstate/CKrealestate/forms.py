@@ -39,7 +39,7 @@ class PropertyForm(forms.ModelForm):
             'property_street_address': forms.TextInput(attrs={'style': 'width: 300px;'}),
             'property_state': forms.TextInput(attrs={'style': 'width: 30px;'}),
             'property_zip_code': forms.TextInput(attrs={'style': 'width: 80px;'}),
-            'property_title': forms.TextInput(attrs={'style': 'width: 700px;'}),
+            'property_title': forms.TextInput(attrs={'style': 'min-width: 500px;'}),
             'property_area': forms.NumberInput(attrs={'style': 'width: 100px;'}),
             'property_year_built': forms.NumberInput(attrs={'style': 'width: 100px;'}),
             'property_bedroom_count':  forms.NumberInput(attrs={'style': 'width: 50px;'}),
