@@ -203,16 +203,29 @@ def share_property(request, property_id):
                   dict(base_url=base_url, property_id=property_id, item=property, form=form))
 
 
-
+prev_sort = 'property_id'
+prev_sortDir = 'asc'
 def search_all_listings(request):
-    global selected_price_range, selected_neighborhood, selected_home_type
+    global selected_price_range, selected_neighborhood, selected_home_type, prev_sortDir, prev_sort
     selected_home_type = None
     selected_neighborhood = None
     selected_price_range = None
     property_price_range = Property_Price_Range.objects.all().order_by('price_range_id')
     property_neighborhood = Property_Neighborhood.objects.all().order_by('neighborhood_name')
     property_home_type = Property_Type.objects.all().order_by('property_type_name')
-    propertySearch = Property.objects.filter(property_active=True).all().order_by('property_id')
+    sort = request.GET.get('qSortBy')
+    sortDir = request.GET.get('qSortDir')
+    if sort is not None:
+        prev_sort = sort
+        prev_sortDir = sortDir
+        propertySearch = Property.objects.filter(property_active=True).all().order_by(sort)
+    else:
+        propertySearch = Property.objects.filter(property_active=True).all().order_by(prev_sort)
+        if prev_sortDir == 'desc':
+            propertySearch = propertySearch.reverse()
+        else:
+            propertySearch = propertySearch.all()
+
 
     if request.method == 'POST':
         allowed_filters = ['price_range_id', 'neighborhood_id', 'home_type_id']
@@ -237,14 +250,14 @@ def search_all_listings(request):
                 propertySearch = propertySearch.filter(**{f: request.POST.get(f)})
 
     active_count = propertySearch.filter(property_active=True).count()
-    sort = request.GET.get('qSortBy')
-    sortDir = request.GET.get('qSortDir')
+
     if sort is not None:
         propertySearch = propertySearch.order_by(sort)
         if sortDir == 'desc':
             propertySearch = propertySearch.reverse()
         else:
             propertySearch = propertySearch.all()
+
     paginator = Paginator(propertySearch, 5)  # 1 items per page
     page = request.GET.get('page')
     try:
