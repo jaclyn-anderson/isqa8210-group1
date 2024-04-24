@@ -218,13 +218,7 @@ def search_all_listings(request):
     if sort is not None:
         prev_sort = sort
         prev_sortDir = sortDir
-        propertySearch = Property.objects.filter(property_active=True).all().order_by(sort)
-    else:
-        propertySearch = Property.objects.filter(property_active=True).all().order_by(prev_sort)
-        if prev_sortDir == 'desc':
-            propertySearch = propertySearch.reverse()
-        else:
-            propertySearch = propertySearch.all()
+    propertySearch = Property.objects.filter(property_active=True).all().order_by(prev_sort)
 
 
     if request.method == 'POST':
@@ -253,10 +247,11 @@ def search_all_listings(request):
 
     if sort is not None:
         propertySearch = propertySearch.order_by(sort)
-        if sortDir == 'desc':
-            propertySearch = propertySearch.reverse()
-        else:
-            propertySearch = propertySearch.all()
+
+    if sortDir == 'desc' or prev_sortDir == 'desc':
+        propertySearch = propertySearch.reverse()
+    else:
+        propertySearch = propertySearch.all()
 
     paginator = Paginator(propertySearch, 5)  # 1 items per page
     page = request.GET.get('page')
