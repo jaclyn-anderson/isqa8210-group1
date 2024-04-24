@@ -76,6 +76,7 @@ class ProfileForm(forms.ModelForm):
             'contact_office_state': forms.TextInput(attrs={'style': 'width: 30px;'}),
             'contact_office_zip_code': forms.TextInput(attrs={'style': 'width: 80px;'}),
             'contact_email': forms.TextInput(attrs={'style': 'width: 300px;'}),
+            'contact_phone': forms.TextInput(attrs={'style': 'width: 110px;'}),
         }
 
 
