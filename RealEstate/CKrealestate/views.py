@@ -22,16 +22,26 @@ def featured(request, pk):
 
 
 def all_listings(request):
-    property1 = Property.objects.filter(property_active=True).all().order_by('property_id')
-    active_count = Property.objects.filter(property_active=True).count()
+    global prev_sort, prev_sortDir
+
     sort = request.GET.get('qSortBy')
     sortDir = request.GET.get('qSortDir')
     if sort is not None:
+        prev_sort = sort
+        prev_sortDir = sortDir
+    else:
+        prev_sort = globals().get("prev_sort", "property_id")
+        prev_sortDir = globals().get("prev_sortDir", "asc")
+
+    property1 = Property.objects.filter(property_active=True).all().order_by(prev_sort)
+    active_count = Property.objects.filter(property_active=True).count()
+
+    if sort is not None:
         property1 = property1.order_by(sort)
-        if sortDir == 'desc':
-            property1 = property1.reverse()
-        else:
-            property1 = property1.all()
+    if sortDir == 'desc' or prev_sortDir == 'desc':
+        property1 = property1.reverse()
+    else:
+        property1 = property1.all()
     paginator = Paginator(property1, 5)  # 1 items per page
 
     page = request.GET.get('page')
@@ -54,16 +64,25 @@ def omahalinks(request):
 
 @login_required
 def siteadminlanding(request):
-    property1 = Property.objects.all().order_by('property_id')  # for all the records
+    global prev_sort, prev_sortDir
+
     status = Property_Status.objects.all().order_by('property_status_name')
     sort = request.GET.get('qSortBy')
     sortDir = request.GET.get('qSortDir')
     if sort is not None:
+        prev_sort = sort
+        prev_sortDir = sortDir
+    else:
+        prev_sort = globals().get("prev_sort", "property_id")
+        prev_sortDir = globals().get("prev_sortDir", "asc")
+
+    property1 = Property.objects.all().order_by(prev_sort)  # for all the records
+    if sort is not None:
         property1 = property1.order_by(sort)
-        if sortDir == 'desc':
-            property1 = property1.reverse()
-        else:
-            property1 = property1.all()
+    if sortDir == 'desc' or prev_sortDir == 'desc':
+        property1 = property1.reverse()
+    else:
+        property1 = property1.all()
     paginator = Paginator(property1, 5)  # 1 items per page
 
     page = request.GET.get('page')
@@ -203,13 +222,8 @@ def share_property(request, property_id):
                   dict(base_url=base_url, property_id=property_id, item=property, form=form))
 
 
-prev_sort = 'property_id'
-prev_sortDir = 'asc'
 def search_all_listings(request):
-    global selected_price_range, selected_neighborhood, selected_home_type, prev_sortDir, prev_sort
-    selected_home_type = None
-    selected_neighborhood = None
-    selected_price_range = None
+    global selected_price_range, selected_neighborhood, selected_home_type, prev_sort, prev_sortDir
     property_price_range = Property_Price_Range.objects.all().order_by('price_range_id')
     property_neighborhood = Property_Neighborhood.objects.all().order_by('neighborhood_name')
     property_home_type = Property_Type.objects.all().order_by('property_type_name')
@@ -218,9 +232,20 @@ def search_all_listings(request):
     if sort is not None:
         prev_sort = sort
         prev_sortDir = sortDir
+    else:
+        prev_sort = globals().get("prev_sort", "property_id")
+        prev_sortDir = globals().get("prev_sortDir", "asc")
+        selected_home_type = None
+        selected_neighborhood = None
+        selected_price_range = None
+
     propertySearch = Property.objects.filter(property_active=True).all().order_by(prev_sort)
-
-
+    if selected_home_type is not None:
+        propertySearch = propertySearch.filter(home_type=selected_home_type)
+    if selected_neighborhood is not None:
+        propertySearch = propertySearch.filter(neighborhood=selected_neighborhood)
+    if selected_price_range is not None:
+        propertySearch = propertySearch.filter(price_range=selected_price_range)
     if request.method == 'POST':
         allowed_filters = ['price_range_id', 'neighborhood_id', 'home_type_id']
         if request.POST.get('home_type_id'):
