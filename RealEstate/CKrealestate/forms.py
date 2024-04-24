@@ -72,6 +72,10 @@ class ProfileForm(forms.ModelForm):
         widgets = {
             'contact_profile_description': forms.Textarea(attrs={'rows': 5, 'cols': 140}),
             'contact_website_link': forms.TextInput(attrs={'style': 'width: 700px;'}),  # Adjust width as needed
+            'contact_office_street_address': forms.TextInput(attrs={'style': 'width: 300px;'}),
+            'contact_office_state': forms.TextInput(attrs={'style': 'width: 30px;'}),
+            'contact_office_zip_code': forms.TextInput(attrs={'style': 'width: 80px;'}),
+            'contact_email': forms.TextInput(attrs={'style': 'width: 300px;'}),
         }
 
 
