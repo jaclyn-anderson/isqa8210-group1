@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$cd@7+ga1!0e5=!%a_yo$jm3w(%kea=iq7v$vlk3fjptstm1b&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ciwalker.pythonanywhere.com']
 
 
 # Application definition
@@ -121,6 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/ciwalker/isqa8210-group1/RealEstate/CKrealestate/static'
 # Base url to serve media files
 MEDIA_URL = '/media/'
 
