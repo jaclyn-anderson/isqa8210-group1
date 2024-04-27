@@ -5,14 +5,21 @@
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Include jQuery UI -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-
+   <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Include Bootstrap DatePicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Bootstrap DatePicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <hr>
     <div class="row">
-        <p style="float: right; margin-right: 20px;"><a href="{% url 'siteadminlanding' %}" class="btn site-admin-btn" style="color: floralwhite;">Back
-            to Main</a></p>
-    </div>
+        <p style="float: right; margin-right: 20px;"> <a href="{% url 'siteadminlanding' %}" class="btn site-admin-btn" style="color: floralwhite;">Back to Main</a></p>
+   </div>
+
 
     <div class="row" style="margin-top: 50px">
         <div class="col-sm-4">
@@ -55,9 +62,8 @@
                             <div style=" margin-top: 30px; ">
                                 <form method="GET" action="{% url 'siteadminreports' %}" style="display: flex; align-items: center; padding-bottom: 10px;">
                                     <div class="form-row align-items-center">
-                                        <div class="col-auto">
-                                            <input type="month" class="form-control mb-2" id="selected_month_year"
-                                                   name="selected_month_year" value="{{ selected_month_year }}">
+                                        <div class="col-auto input-group date">
+                                            <input type="text" id="selected_month_year" name="selected_month_year" value="{{selected_month_year}}" placeholder="Select Month and Year">
                                         </div>
 
                                     </div>
@@ -192,22 +198,27 @@
 
 
     <script>
-        $(function () {
-            $("#datepicker").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                dateFormat: 'mm/yy',  // Format for month and year
-                onClose: function (dateText, inst) {
-                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                    $(this).datepicker('setDate', new Date(year, month, 1));
-                }
+        $(document).ready(function(){
+            $('#selected_month_year').datepicker({
+                format: "yyyy-mm",
+                viewMode: "months",
+                minViewMode: "months",
+                autoclose: true,
             });
-
-            // Handle click on calendar icon button
-            $("#datepicker-icon").click(function () {
-                $("#datepicker").datepicker("show");
+            
+            // Handle form submission
+            $('#submitBtn').click(function(){
+                var selectedMonthYear = $('#selected_month_year').val();
+                $.post('', { month_year: selectedMonthYear })
+                .done(function(data) {
+                    // Handle success
+                    // For example, you can display a message or redirect
+                    console.log("Date selected: " + selectedMonthYear);
+                })
+                .fail(function() {
+                    // Handle error
+                    console.log("Error submitting form");
+                });
             });
         });
     </script>
