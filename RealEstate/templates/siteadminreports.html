@@ -59,9 +59,12 @@
                                 <form method="GET" action="{% url 'siteadminreports' %}" style="display: flex; align-items: center; padding-bottom: 10px;">
                                     <div class="form-row align-items-center">
                                         <div class="col-auto input-group date">
-                                            <input type="text" id="selected_month_year" name="selected_month_year" value="{{selected_month_year}}" placeholder="Select Month and Year">
+                                            <input type="text" id="selected_month_year" class="form-control" name="selected_month_year"
+                                                   value="{{ selected_month_year }}"
+                                                   placeholder="Select Month and Year">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
-
                                     </div>
                                     <button style="margin-left: 20px" type="submit" class="site-admin-btn">Run
                                         Report
