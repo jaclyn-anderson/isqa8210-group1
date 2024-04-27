@@ -38,14 +38,14 @@
         </tr>
     <tr>
       <th scope="col">ID</th>
-      <th colspan="3" scope="col" style="width: 30%">Property Title</th>
-        <th scope="col">Property Price
+      <th colspan="3" scope="col" style="width: 25%">Property Title</th>
+        <th scope="col" style="width: 8%">Property Price
          <a href="?qSortBy=property_price&qSortDir=asc">&#x25B2;</a>
             <a href="?qSortBy=property_price&qSortDir=desc">&#x25BC;</th>
-        <th scope="col" style="width: 15%">Neighborhood
+        <th scope="col" style="width: 16%">Neighborhood
          <a href="?qSortBy=neighborhood__neighborhood_name&qSortDir=asc">&#x25B2;</a>
             <a href="?qSortBy=neighborhood__neighborhood_name&qSortDir=desc">&#x25BC;</th>
-        <th scope="col" style="width: 15%">Home Type
+        <th scope="col" style="width: 17%">Home Type
          <a href="?qSortBy=home_type__property_type_name&qSortDir=asc">&#x25B2;</a>
             <a href="?qSortBy=home_type__property_type_name&qSortDir=desc">&#x25BC;</th>
          <th scope="col" style="width: 13%">Featured
@@ -54,10 +54,10 @@
         <th scope="col" style="width: 10%">Status
          <a href="?qSortBy=status__property_status_name&qSortDir=asc">&#x25B2;</a>
             <a href="?qSortBy=status__property_status_name&qSortDir=desc">&#x25BC;</th>
-        <th scope="col" style="width: 15%">Active
+        <th scope="col" style="width: 16%">Active
          <a href="?qSortBy=property_active&qSortDir=asc">&#x25B2;</a>
             <a href="?qSortBy=property_active&qSortDir=desc">&#x25BC;</th>
-        <th colspan="2" scope="col">Click to Update</th>
+        <th colspan="2" scope="col" style="width: 10%">Click to Update</th>
     </tr> 
   </thead>
       <tbody>
@@ -90,9 +90,9 @@
                 <input type="checkbox" class="styled-checkbox" name="active" style="margin-left: 25px"  {% if obj.property_active == True %} checked="checked"  {% endif %} >
 
                </td>
-               <td style="width: 10%">
+               <td>
                 
-                    <button type="submit">Click to Update</button>
+                    <button type="submit" class="site-admin-btn">Click to Update</button>
                     
                    
           </td>

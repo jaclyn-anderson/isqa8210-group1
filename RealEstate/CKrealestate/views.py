@@ -177,11 +177,10 @@ def contact_realtor(request):
                 'body': body
             })
 
-        message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\n{body}'
+        message = f'Name: {name}\nEmail: {email}\nPhone: {phone}\n\nMessage: {body}'
         recipient_email = 'msmwillschoolacct@gmail.com'
         send_mail('CK Real Estate Contact Form Submission', message, email, [recipient_email])
-        success_message = 'Your email has been sent successfully!'
-        return render(request, 'contact_success.html', {'success_message': success_message})
+        return render(request, 'contact_success.html')
     else:
         return render(request, 'contact-realtor.html')
 
@@ -352,4 +351,9 @@ def siteadminreports(request):
             'overall_total_count': overall_total_count,
         })
     else:
-        return render(request, 'siteadminreports.html')
+        if selected_month_year:
+            message = "Please try again, no results for your inquiry for: " + str(month) + "/" + str(year) + "!"
+        else:
+            message = "Please select Month and Year!"
+        return render(request, 'siteadminreports.html', {'message': message})
+

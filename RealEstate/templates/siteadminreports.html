@@ -73,10 +73,10 @@
                                     <table class="table table-striped table-bordered" style="border: 2px solid #0073e5;">
                                         <thead>
                                         <tr>
-                                            <th style=" border: 2px solid blue" scope="col">Search Property</th>
-                                            <th style=" border: 2px solid blue" scope="col">Item</th>
-                                            <th style=" border: 2px solid blue" scope="col">Total Count</th>
-                                            <th style=" border: 2px solid blue" scope="col">Totals</th>
+                                            <th style=" border: 2px solid blue; color: white;" scope="col">Search Category</th>
+                                            <th style=" border: 2px solid blue; color: white;" scope="col">Item</th>
+                                            <th style=" border: 2px solid blue; color: white;" scope="col">Item Total</th>
+                                            <th style=" border: 2px solid blue; color: white;" scope="col">Totals</th>
                                         </tr>
                                         </thead>
                                         <tbody class="table-striped">
@@ -98,12 +98,12 @@
                                         {% endfor %}
                                         {% if subtotal_price_range_count > 0 %}
                                         <tr>
-                                            <td style="border: 2px solid blue">
-                                                Subtotal
+                                            <td style="border: 2px solid #0073e5">
+                                                <b>Price Range Subtotal</b>
                                             </td>
-                                            <td></td>
-                                            <td style="border: 2px solid blue"></td>
-                                            <td style="border: 2px solid blue">
+                                             <td style="border: 2px solid #0073e5"></td>
+                                            <td style="border: 2px solid #0073e5"></td>
+                                            <td style="border: 2px solid #0073e5">
                                                 {{ subtotal_price_range_count }}
                                             </td>
                                         </tr>
@@ -126,12 +126,12 @@
                                         {% endfor %}
                                         {% if subtotal_home_type_count > 0 %}
                                         <tr>
-                                            <td style="border: 2px solid blue">
-                                                Subtotal
+                                            <td style="border: 2px solid #0073e5">
+                                                <b>Home Type Subtotal</b>
                                             </td>
-                                            <td></td>
-                                               <td style="border: 2px solid blue"></td>
-                                            <td style="border: 2px solid blue">
+                                            <td style="border: 2px solid #0073e5"></td>
+                                            <td style="border: 2px solid #0073e5"></td>
+                                            <td style="border: 2px solid #0073e5">
                                                 {{ subtotal_home_type_count }}
                                             </td>
 
@@ -152,19 +152,19 @@
                                         {% endfor %}
                                         {% if subtotal_neighborhood_count > 0 %}
                                         <tr>
-                                            <td style="border: 2px solid blue">
-                                                Subtotal
+                                            <td style="border: 2px solid #0073e5">
+                                                <b>Neighborhood Subtotal</b>
                                             </td>
-                                            <td style="border: 2px solid blue"></td>
-                                            <td style="border: 2px solid blue"></td>
-                                            <td style="border: 2px solid blue">
+                                             <td style="border: 2px solid #0073e5"></td>
+                                            <td style="border: 2px solid #0073e5"></td>
+                                            <td style="border: 2px solid #0073e5">
                                               {{  subtotal_neighborhood_count }}
                                             </td>
                                         </tr>
                                         {% endif %}
                                         <tr>
                                             <td style="border: 2px solid blue" >
-                                                Total
+                                                <b>Overall Total for {{ selected_month_year }}</b>
                                             </td>
                                             <td style="border: 2px solid blue"></td>
                                             <td style="border: 2px solid blue"></td>
@@ -175,7 +175,7 @@
                                         </tbody>
                                     </table>
                                 {% else %}
-                                    <p>No records found for your report inquiry.</p>
+                                    <p>{{ message }}</p>
                                 {% endif %}
                             </div>
 
@@ -189,7 +189,7 @@
         </div>
 
     </div>
-    
+
 
     <script>
         $(function () {

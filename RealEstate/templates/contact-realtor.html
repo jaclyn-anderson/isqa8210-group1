@@ -11,12 +11,12 @@
       {% if error_message %}
           <p class="text-danger"><b>{{ error_message }}</b></p>
     {% endif %}
-        <table class="table" style="border: 5px solid blue;">
-             <form method="post" action="{% url 'contact_realtor' %}">
+        <table class="table" style="border: 5px solid #0073e5;">
+            <form method="post" action="{% url 'contact_realtor' %}">
                     {% csrf_token %}
             <thead>
                 <tr>
-                    <th colspan="11" style="text-align: center; background-color: blue; color: white; font-size: 18pt;">
+                    <th colspan="11" style="text-align: center; background-color: #0073e5; color: white; font-size: 18pt;">
                         Contact Realtor
                     </th>
                 </tr>
@@ -51,11 +51,11 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                    <button type="submit" class="admin-btn" style="float: right;">Send Email</button>
+                    <button type="submit" class="admin-btn" style="float: right; background-color: #0073e5; color: white;">Send Email</button>
                         </td>
                     </tr>
-                </form> 
-            </thead>
+                  </thead>
+                </form>
             </table>
         </div>
     </div>
