@@ -53,7 +53,7 @@ def all_listings(request):
 
 
 def omahalinks(request):
-    return render(request, 'omahalinks.html')
+    return render(request, 'omaha-links.html')
 
 
 @login_required
@@ -203,11 +203,14 @@ def share_property(request, property_id):
             # Retrieve property details
             property_title = property.property_title
             # Compose email message
-            subject = f"{cd['name']}, requests more information on {property_title}"
-            message = f"Hi,\n\n{cd['name']} has requested more information about Property Link: {base_url}property-details/{property_id} - {property_title}.\n\n" \
-                      f"Message: {cd['message']}\n\nContact {cd['name']} at email: {cd['email']} or phone: {cd['phone']}."
-            send_mail(subject, message, 'your_email@example.com', ['msmwillschoolacct@gmail.com'])
-            return render(request, 'contact_success.html', {'property_title': property_title})
+
+
+            subject = f"{cd['name']} requests more information on {property_title}"
+            message = f"Hi,\n\n{cd['name']} has requested more information about {property_title}.\n\n" \
+                      f"Message: {cd['message']}\n\nContact them at: {cd['email']}"
+            send_mail(subject, message, 'your_email@example.com', ['realtor_email@example.com'])
+            return render(request, 'contact-success.html', {'property_title': property_title})
+
     else:
         form = ContactForm()
 
