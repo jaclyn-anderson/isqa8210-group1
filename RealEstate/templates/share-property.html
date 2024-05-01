@@ -19,12 +19,13 @@
                     <thead>
                         <tr>
                             <th colspan="11" style="text-align: center; background-color: #0073e5; color: white; font-size: 18pt;">
-                                Contact Realtor About {{ item.property_title }}
+                                Contact Realtor About:<br> {{ item.property_title }}
                             </th>
                         </tr>
                         <tr>
-                            <td colspan="2">
-                                <p style="font-size: 15px; text-align:center; padding-left: 10px;">Please complete all required fields below</p>
+                            <td colspan="3">
+                                <p style="font-size: 15px;">Please complete all required fields below and then click the <b>'Send Email'</b> button
+                         (fields that have a <span class="text-danger" style="font-size: larger">*</span> are <b>Required</b>).</p>
                             </td>
                         </tr>
                         <tr>
@@ -44,7 +45,7 @@
                         <tr>
                             <td colspan="3">
                                 <label for="property_link">Property Link</label>
-                                <input type="text" id="property_link" name="property_link" style="width: 400px;" readonly disabled>
+                                <input type="text" id="property_link" name="property_link" style="width: 500px;" readonly disabled>
                             </td>
                         </tr>
                         <tr>
@@ -74,7 +75,7 @@
     function generatePropertyLink() {
         const propertyId = document.getElementById('property_id').value.trim();
         const baseUrl = '{{ base_url }}';
-        document.getElementById('property_link').value = `${baseUrl}share_property/${propertyId}`;
+        document.getElementById('property_link').value = `${baseUrl}property-details/${propertyId}`;
     }
     document.addEventListener('DOMContentLoaded', function() {
         generatePropertyLink();
