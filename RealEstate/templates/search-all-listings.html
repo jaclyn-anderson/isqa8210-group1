@@ -7,7 +7,7 @@
 
 {% block content %}
     <div class="row">
-        <form method="post" action="{% url 'search_all_listings' %}">
+        <form method="post" action="{% url 'search_all_listings' %}" id="searchForm">
             {% csrf_token %}
             <div class= "col-sm-2" style="margin-left: 150px; margin-top: 30px;">
                 <select name="price_range_id" id="price_range_id" aria-label="Select Price Range" style="padding: 5px; border-radius: 5px">
@@ -37,13 +37,30 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class= "col-sm-2" style="margin-top: 30px; overflow-x:auto;">
+            <div class= "col-sm-2" style="margin-top: 30px; overflow-x:auto; display: flex">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" style="border-radius: 5px; width: 120px;">
+                <button type="button" onclick="submitForm()" style="border-radius: 5px; width: 120px;">
                     Search
                 </button>
+                &nbsp;
+                <button type="button" onclick="resetForm()" style="border-radius: 5px; width: 120px;">
+                    Clear
+                </button>
             </div>
+        
+ <script>
+        function resetForm() {
+            document.getElementById("price_range_id").value = '';
+            document.getElementById("neighborhood_id").value = '';
+            document.getElementById("home_type_id").value = '';
+            submitForm();
+        }
+        function submitForm() {
+            let form = document.getElementById("searchForm");
+            form.submit();
+        }
+    </script>
         </form>
     </div>
     <div class="row">
