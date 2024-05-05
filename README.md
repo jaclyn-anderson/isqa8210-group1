@@ -62,7 +62,7 @@ This page is the landing page for the website for the site visitor.
 ### all-listings.html
 This page shows all the listings from the property table that is marked as active (property_active = True) for the site visitor.
 - Included in views.py - def all_listings
-- in table format with sorting and paging (5 listings per page), it shows from the property table:
+- in table format with sorting and paging (5 listings per page), it shows from the property table fields listed below:
   - property_title
   - property_price
   - neighborhood
@@ -72,7 +72,7 @@ This page shows all the listings from the property table that is marked as activ
 ### search-all-listings.html
 This page shows all the listings from the property table that is marked as active (property_active = True) for the site visitor, as well as the search function by price range, neighborhood, and home type.
 - included in views.py - def seacrh_all_listings
-- in table format with sorting and paging (5 listings per page), it shows from the property table:
+- in table format with sorting and paging (5 listings per page), it shows from the property table fields listed below:
   - property_title
   - property_price
   - neighborhood
@@ -147,14 +147,65 @@ This page is the login in page for the site admin.
 ### siteadminlanding.html
 This is the main page for the site admin and can only be accessed when the site admin is logged in.
 - included in views.py - def siteadminlanding
+-  in table format with sorting and paging (5 listings per page), it shows from the property table fields listed below:
+  - property_title
+  - property_price (edittable)
+  - neighborhood
+  - home-type
+  - property_featured (edittable)
+  - status (edittable)
+  - property_active (edittable)
+- click to Update button (updates record in database for row updated)
 ### siteadminreports.html
 This is the report page for the site admin and can only be accessed when the site admin is logged in.
 - included in views.py - def siteadminreports
+  - select month and year to run report for all searches for the site store in search_log table
+    - report shows each category item searched with subtotals per category and overall total for month and year selected
+    - page will show message of no results for month and year selected if no results are returned
 ### update-profile.html
 This is the update profile page for the site admin and can only be accessed when the site admin is logged in.
 - included in views.py - def update_profile
 - included in forms.py - class ProfileForm
+- - all fields from the contact table should be included on this form are listed below (note: only one contact should be in the contact table):
+  - contact_first_name
+  - contact_last_name
+  - contact_phone
+  - contact_email
+  - contact_website_link
+  - contact_office_street_address
+  - contact_office_city
+  - contact_office_state
+  - contact_office_zip_code
+  - contact_profile_image
+  - contact_profile_description
+- default contact information will be provided for initial rollout and should be updated by real estate agent when deployed
+- once all required fields are complete there should be a submit button to update the profile to the contact table.
+- once updated and the newly updated fields should be viewable to the site visitor and the site admin on the profile.html page. 
 ### add-property.html
 This is the add property page for the site admin and can only be accessed when the site admin is logged in.
 - included in views.py - def add_property
 - included in forms.py - class PropertyForm
+- all fields for a specific property from the property table should be included on this form are listed below:
+  - property_title
+  - property_photo1
+  - property_photo2 (not required)
+  - property_photo3 (not required)
+  - property_photo4 (not required)
+  - property_price
+  - property_price_range
+  - property_street address
+  - property_city
+  - property_state
+  - property_zip_code
+  - status
+  - property_description
+  - home_type
+  - property_year_built
+  - neighborhood
+  - property_area
+  - property_bedroom_count
+  - property_bathroom_count
+  - property_active (default=True)
+- once all required fields are complete there should be a submit button to add the property to the property table.
+- once added and the property_active = True the property listing should be viewable to the site visitor on the all-listings.html and search-all-listings.html pages.
+- once added the property listing should be viewable to the site admin on the siteadminlanding.html page.
