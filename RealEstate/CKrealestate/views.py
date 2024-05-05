@@ -89,6 +89,20 @@ def siteadminlanding(request):
         # Update only if the form is submitted
         if 'price' in request.POST:
             obj.property_price = request.POST.get('price').replace(',', '')
+            # Convert integer_to_check to int if needed
+            price_to_check = int(obj.property_price)
+
+            # Get all the price ranges from the database
+            price_ranges = Property_Price_Range.objects.all()
+
+            # Check if the integer falls within any of the existing price ranges
+            for price_range in price_ranges:
+                min_price, max_price = map(lambda x: int(x.replace(',', '').replace('+', '')), price_range.price_range_value.split(' - '))
+                if min_price <= price_to_check <= max_price:
+                    # Integer falls within this price range, get the price_range_id
+                    price_range_id = Property_Price_Range.objects.get(price_range_id=price_range.price_range_id)
+                    obj.price_range = price_range_id
+                    break
         if 'status' in request.POST:
             status_id = request.POST.get('status')
             status = Property_Status.objects.get(property_status_id=status_id)
